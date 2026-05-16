@@ -1,0 +1,16 @@
+.login-shell {
+	--auth-shell-max-width: 28.75rem;
+}
+
+.auth-card__signup-prompt {
+	margin-top: 1rem;
+	font-size: 0.92rem;
+}
+
+.auth-card__signup-link {
+	color: var(--primary-purple);
+	font-weight: 700;
+	text-decoration: none;
+	transition: var(--transition);
+}
+

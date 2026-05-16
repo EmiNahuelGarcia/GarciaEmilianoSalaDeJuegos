@@ -1,1 +1,54 @@
-<p>login works!</p>
+<div class="auth-page login-page">
+    <div class="auth-shell login-shell">
+        <form class="auth-card login-card" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="auth-card__header login-card__header">
+                <div class="auth-card__title login-card__title">
+                    <span>Login a la cuenta</span>
+                </div>
+                <div class="auth-card__dots login-card__dots"><span></span><span></span><span></span></div>
+            </div>
+
+            <div class="auth-card__body login-card__body">
+                <div class="auth-field login-field">
+                    <input type="email" formControlName="email" id="email" placeholder=" "
+                        class="auth-field__input"
+                        [class.auth-field__input--error]="email?.invalid && email?.touched" />
+                    <label for="email" class="auth-field__label">EMAIL</label>
+
+                    @if (email?.touched && email?.errors) {
+                    @if (email?.getError('required')) {
+                    <small class="auth-field__error">El email es obligatorio.</small>
+                    } @else if (email?.getError('email')) {
+                    <small class="auth-field__error">Ingrese un formato de email valido.</small>
+                    }
+                    }
+                </div>
+                <div class="auth-field login-field">
+                    <input type="password" formControlName="password" id="password" placeholder=" " maxlength="20"
+                        class="auth-field__input"
+                        [class.auth-field__input--error]="password?.invalid && password?.touched" />
+                    <label for="password" class="auth-field__label">CLAVE</label>
+                    @if (password?.touched && password?.errors) {
+                    @if (password?.getError('required')) {
+                    <small class="auth-field__error">Este campo es obligatorio</small>
+                    } @else if (password?.getError('minlength'); as MINLENGTH) {
+                    <small class="auth-field__error">Su contraseña no puede ser menor a {{ MINLENGTH.requiredLength }} caracteres</small>
+                    } @else if (password?.getError('pattern')) {
+                    <small class="auth-field__error">Solo caracteres alfanumericos</small>
+                    }
+                    }
+                </div>
+
+                <button data-text="CONECTAR" type="submit" [disabled]="loginForm.invalid"
+                    class="auth-card__submit login-card__submit">
+                    <span class="auth-card__submit-text login-card__submit-text">Conectar</span>
+                </button>
+
+                <div class="auth-card__signup-prompt flex-center muted-text">
+                    <span>¿Sos nuevo?</span>
+                    <a routerLink="../registro" class="auth-card__signup-link btn-pill">Registrate</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
