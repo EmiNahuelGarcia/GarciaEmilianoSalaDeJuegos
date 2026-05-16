@@ -1,0 +1,16 @@
+<article class="game-card">
+	<div class="game-card__media">
+		<img [src]="image()" [alt]="textImage()" class="game-card__img" />
+		<span class="game-card__badge">{{ nameGame() }}</span>
+	</div>
+
+	<div class="game-card__body">
+		<h3 class="game-card__title">{{ title() }}</h3>
+		<p class="game-card__desc">{{ descriptionGame() }}</p>
+		<div class="game-card__actions">
+			<a [href]="link()" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+				{{ textButton() }}
+			</a>
+		</div>
+	</div>
+</article>

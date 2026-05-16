@@ -1,6 +1,25 @@
+@if (auth.actualUser()) {
+<main>
+    <div class="juegos-card-container">
+        @for (card of cards; track card.nameGame) {
+        <app-juegos-card 
+        [title]="card.title" 
+        [image]="card.image" 
+        [textImage]="card.textImage"
+        [nameGame]="card.nameGame" 
+        [descriptionGame]="card.descriptionGame" 
+        [textButton]="card.textButton"
+        [link]="card.link">
+        </app-juegos-card>
+        }
+    </div>
+
+</main>
+}@else {
 <main class="home-screen">
     <div class="home-msg">
         <h1 class="title">BIENVENIDO A LA SALA DE ESPAR GAMES</h1>
         <p class="subtitle-msg">disfruta de esta experiencia.</p>
     </div>
 </main>
+}
