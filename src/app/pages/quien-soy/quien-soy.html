@@ -1,1 +1,66 @@
-<p>quien-soy works!</p>
+<div class="auth-page quien-soy-page">
+    <div class="profile-container">
+        @if (usuarioGitHub()) {
+        <div class="profile-wrapper">
+            <div class="profile-photo-section">
+                <img [src]="usuarioGitHub()!.avatar_url" [alt]="usuarioGitHub()!.login" class="profile-avatar" />
+                <h1 class="profile-name">{{ usuarioGitHub()!.login }}</h1>
+            </div>
+
+            <div class="profile-info-section">
+                <div class="profile-row">
+                    <div class="profile-info">
+                        <div class="info-item">
+                            <span class="info-label">ID de usuario:</span>
+                            <span class="info-value">{{ usuarioGitHub()!.id }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Ubicación:</span>
+                            <span class="info-value">{{ usuarioGitHub()!.location }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Miembro desde:</span>
+                            <span class="info-value">{{ formatearFecha(usuarioGitHub()!.created_at) }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Repositorios públicos:</span>
+                            <span class="info-value">{{ usuarioGitHub()!.public_repos }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Seguidores:</span>
+                            <span class="info-value">{{ usuarioGitHub()!.followers }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Siguiendo:</span>
+                            <span class="info-value">{{ usuarioGitHub()!.following }}</span>
+                        </div>
+                    </div>
+                    <div class="bio-card">
+                        <h3 class="bio-title">Sobre mi</h3>
+                        <p class="bio-text">{{ usuarioGitHub()!.bio }}</p>
+                        <div class="info-item">
+                            <span class="info-label">Email:</span>
+                            <span class="info-value">{{ usuarioGitHub()!.email ?? 'enahuelgarcia@gmail.com' }}</span>
+                        </div>
+                        <br>
+                        <span class="bio-text">Juego elegido: Froggy</span>
+                        <h5>Reglas:</h5>
+                        <p>La rana debe cruzar la calle sin que la atropellen los vehículos. El jugador dispone
+                            de <strong>3 vidas</strong>. Si pierde las 3 vidas, es <em>Game Over</em>. Si la
+                            rana llega al otro lado de la avenida, el jugador <strong>gana</strong>.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-actions">
+                <a [href]="usuarioGitHub()!.html_url" target="_blank" rel="noopener noreferrer" class="btn-github">
+                    Ver perfil en GitHub
+                </a>
+            </div>
+        </div>
+        } @else {
+        <div class="profile-loading">
+            <p>Cargando información del perfil...</p>
+        </div>
+        }
+    </div>
+</div>
