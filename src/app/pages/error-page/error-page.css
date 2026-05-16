@@ -1,0 +1,105 @@
+.error-page {
+	--error-page-bg-top: color-mix(in srgb, var(--bg-dark) 82%, var(--primary-purple) 18%);
+	--error-page-bg-bottom: color-mix(in srgb, var(--bg-dark) 94%, black 6%);
+	--error-page-text: #f4f1ff;
+	--error-page-muted: color-mix(in srgb, var(--text-main) 72%, transparent);
+	--error-page-accent: var(--primary-purple);
+	--error-page-accent-shadow: rgba(111, 78, 232, 0.35);
+	--error-page-grid: rgba(255, 255, 255, 0.035);
+	--error-page-button-text: #120f1f;
+
+	min-height: 100vh;
+	display: grid;
+	place-items: center;
+	padding: 24px;
+	background:
+		radial-gradient(circle at top, color-mix(in srgb, var(--error-page-accent) 18%, transparent), transparent 28%),
+		radial-gradient(circle at center, color-mix(in srgb, var(--secondary-blue) 10%, transparent), transparent 46%),
+		linear-gradient(180deg, var(--error-page-bg-top) 0%, var(--error-page-bg-bottom) 100%);
+	color: var(--error-page-text);
+	overflow: hidden;
+}
+
+.error-card {
+	width: min(100%, 620px);
+	text-align: center;
+	position: relative;
+	padding: 40px 24px 52px;
+}
+
+.error-card::before {
+	content: '';
+	position: absolute;
+	inset: -20%;
+	background-image:
+		linear-gradient(var(--error-page-grid) 1px, transparent 1px),
+		linear-gradient(90deg, var(--error-page-grid) 1px, transparent 1px);
+	background-size: 64px 64px;
+	mask-image: radial-gradient(circle, black 35%, transparent 78%);
+	pointer-events: none;
+	opacity: 0.8;
+}
+
+.error-code {
+	margin: 0;
+	font-size: clamp(6rem, 24vw, 10rem);
+	line-height: 0.9;
+	font-weight: 800;
+	letter-spacing: 0.06em;
+	color: color-mix(in srgb, var(--error-page-text) 98%, white 2%);
+	text-shadow:
+		0 0 20px color-mix(in srgb, var(--error-page-accent) 35%, transparent),
+		0 0 60px color-mix(in srgb, var(--error-page-accent) 18%, transparent);
+}
+
+.error-title {
+	margin: 18px 0 0;
+	font-size: clamp(1.1rem, 2.4vw, 1.55rem);
+	font-weight: 800;
+	letter-spacing: 0.08em;
+	color: color-mix(in srgb, var(--text-main) 92%, white 8%);
+}
+
+.error-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 260px;
+	margin-top: 28px;
+	padding: 0.95rem 1.5rem;
+	border-radius: 12px;
+	background: linear-gradient(180deg, color-mix(in srgb, var(--error-page-accent) 95%, white 5%) 0%, #6f4ee8 100%);
+	color: var(--error-page-button-text);
+	text-decoration: none;
+	font-size: 0.78rem;
+	font-weight: 800;
+	letter-spacing: 0.12em;
+	box-shadow:
+		0 14px 30px var(--error-page-accent-shadow),
+		inset 0 1px 0 rgba(255, 255, 255, 0.25);
+	transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
+}
+
+.error-button:hover {
+	transform: translateY(-2px);
+	filter: brightness(1.06);
+	box-shadow:
+		0 18px 34px color-mix(in srgb, var(--error-page-accent-shadow) 100%, transparent),
+		inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.error-button:focus-visible {
+	outline: 3px solid rgba(223, 214, 255, 0.95);
+	outline-offset: 4px;
+}
+
+@media (max-width: 480px) {
+	.error-card {
+		padding: 28px 18px 40px;
+	}
+
+	.error-button {
+		width: 100%;
+		min-width: 0;
+	}
+}
