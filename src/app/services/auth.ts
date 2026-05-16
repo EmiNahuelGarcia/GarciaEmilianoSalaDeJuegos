@@ -34,19 +34,19 @@ export class AuthService {
         }
     }
 
-    async login({ email, password }: ILogin): Promise<boolean> {
+    async login({ email, password }: ILogin): Promise<{ ok : boolean, message?: string }> {
         const { data, error } = await this.supabase.getClient().auth.signInWithPassword({ email, password });
 
-        if (error) return false;
+        if (error) return { ok: false, message: 'Credenciales inválidas.' };
 
         if (data.user) {
             this.actualUser.set(data.user);
             console.log('Usuario logueado:', this.actualUser());
             this.router.navigate(['/home']);
-            return true;
+            return { ok: true };
         } else {
-
-            return false;
+            console.error('Error al iniciar sesión:', error);
+            return { ok: false, message: 'Error al iniciar sesión.' };
         }
 
     }
@@ -57,7 +57,7 @@ export class AuthService {
         this.router.navigateByUrl('/home')
     }
 
-    async register({ name, surname, email, age, password }: IRegister): Promise<boolean> {
+    async register({ name, surname, email, age, password }: IRegister): Promise<{ ok: boolean, message?: string }> {
         try {
             const { data, error } = await this.supabase.getClient().auth.signUp({
                 email,
@@ -67,19 +67,23 @@ export class AuthService {
                 }
             });
 
-            if (error) {
-                console.error('Error en el registro:', error);
-                return false;
+            if (error?.status === 422) {
+                console.error('Error en el registro: El correo ya está registrado.');
+                return {ok : false, message: 'El correo ya está registrado.' };
+            }
+
+            else if (error) {
+                console.error('Error en el registro:', error.message);
             }
 
             if (data.user) {
                 return await this.login({ email, password });
             }
-
-            return false;
+            
+            return { ok: false, message: 'Error al registrar el usuario.' };
         } catch (err) {
             console.error('Error inesperado en el registro:', err);
-            return false;
+            return { ok: false, message: 'Error inesperado en el registro.' };
         }
     }
 }

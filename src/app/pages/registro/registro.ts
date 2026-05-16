@@ -38,8 +38,8 @@ export class Registro {
     try {
       const response = await this.auth.register(this.registerForm.value as IRegister);
 
-      if (!response) {
-        this.error.set('No se pudo registrar el usuario.' );
+      if (!response.ok) {
+        this.error.set(response.message || 'No se pudo registrar el usuario.' );
       }
     } finally {
       this.loading.set(false);

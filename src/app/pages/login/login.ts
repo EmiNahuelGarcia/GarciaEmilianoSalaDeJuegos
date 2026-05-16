@@ -32,11 +32,11 @@ export class Login {
     this.loading.set(true);
     try{
       const response= await this.auth.login(this.loginForm.value as ILogin);
-      if(!response){
-        this.error.set('Credenciales incorrectas. Por favor, inténtelo de nuevo.');
+      if(!response.ok){
+        this.error.set(response.message + " Intentalo de nuevo" || 'Error al iniciar sesión. Por favor, intentalo de nuevo.');
       }    
     } catch (error) {
-      this.error.set('Error al iniciar sesión. Por favor, inténtelo de nuevo.');
+      this.error.set('Error al iniciar sesión. Por favor, intentalo de nuevo.');
     } finally {
       this.loading.set(false);
     }

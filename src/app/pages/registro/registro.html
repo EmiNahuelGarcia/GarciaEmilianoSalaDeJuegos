@@ -96,6 +96,11 @@
                 <button data-text="CREAR_CUENTA" type="submit" class="auth-card__submit register-card__submit">
                     <span class="auth-card__submit-text register-card__submit-text">Crear cuenta</span>
                 </button>
+                @if (error()) {
+                <div class="auth-field__error">
+                    {{ error() }}
+                </div>
+                }
             </div>
         </form>
     </div>
