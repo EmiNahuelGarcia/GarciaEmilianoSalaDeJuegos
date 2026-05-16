@@ -16,9 +16,6 @@
     align-items: flex-start;
     gap: 1rem;
     padding: 1.5rem;
-    background: var(--surface-light);
-    border-radius: 12px;
-    box-shadow: var(--shadow-md);
     animation: slideIn 0.5s ease-out;
 }
 
@@ -37,10 +34,7 @@
 }
 
 .bio-card {
-    background: var(--surface-light);
-    border-radius: 12px;
     padding: 1.25rem;
-    box-shadow: var(--shadow-md);
     animation: slideIn 0.5s ease-out;
 }
 
@@ -108,14 +102,12 @@
     flex-direction: column;
     gap: 1.5rem;
     padding: 2rem;
-    background: var(--bg-primary);
-    border-radius: 8px;
     border-left: 4px solid var(--primary-purple);
 }
 
 .info-item {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     gap: 1rem;
     flex-wrap: wrap;
@@ -151,7 +143,7 @@
     background: linear-gradient(135deg,
             var(--primary-purple) 0%,
             var(--accent-blue) 100%);
-    color: white;
+    color: var(--text-main);
     text-decoration: none;
     border-radius: 8px;
     font-weight: 600;

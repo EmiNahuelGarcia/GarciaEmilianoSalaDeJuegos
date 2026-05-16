@@ -16,8 +16,8 @@ export class AuthService {
     constructor() {
         this.checkSession();
         this.supabase.getClient().auth.onAuthStateChange((event: AuthChangeEvent, session: Session | null) => {
-        this.actualUser.set(session?.user ?? null);
-    });
+            this.actualUser.set(session?.user ?? null);
+        });
 
     }
 
@@ -57,25 +57,29 @@ export class AuthService {
         this.router.navigateByUrl('/home')
     }
 
-    async register({ name, surname, email, age, password }: IRegister): Promise<void> {
-        const { data, error } = await this.supabase.getClient().auth.signUp({
-            email: email,
-            password: password,
-            options: {
-                data: {
-                    name: name,
-                    surname: surname,
-                    age: age
+    async register({ name, surname, email, age, password }: IRegister): Promise<boolean> {
+        try {
+            const { data, error } = await this.supabase.getClient().auth.signUp({
+                email,
+                password,
+                options: {
+                    data: { name, surname, age }
                 }
-            },
+            });
 
-        });
-        if (error) {
-            console.error('Error al registrar:', error);            
-        } else {
-            console.log('Usuario registrado:', data.user);
-            this.router.navigate(['/login']);
+            if (error) {
+                console.error('Error en el registro:', error);
+                return false;
+            }
+
+            if (data.user) {
+                return await this.login({ email, password });
+            }
+
+            return false;
+        } catch (err) {
+            console.error('Error inesperado en el registro:', err);
+            return false;
         }
     }
-
 }
