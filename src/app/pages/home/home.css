@@ -1,0 +1,187 @@
+:host {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    --primary-color: var(--primary-purple);
+    --secondary-color: var(--secondary-blue);
+    --bg-col: var(--bg-dark);
+    --danger-text: var(--error-red);
+}
+
+main {
+    width: 100%;
+    min-height: calc(100vh - var(--nav-height));
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+main::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at top left, rgba(167, 139, 250, 0.08), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.06), transparent 26%);
+}
+
+.home-screen {
+    min-height: calc(100vh - var(--nav-height));
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    background: var(--bg-col);
+}
+
+.home-screen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+    background-size: 34px 34px;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent 92%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent 92%);
+}
+
+.home-msg {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    text-align: center;
+    padding: clamp(2rem, 4vw, 3.25rem);
+    animation: welcomeEnter 0.75s ease-out both;
+}
+
+.title {
+    margin: 0;
+    max-width: 12ch;
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 6vw, 4.4rem);
+    line-height: 0.95;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-main);
+    text-shadow: 0 0 8px rgba(167, 139, 250, 0.10), 0 0 18px rgba(96, 165, 250, 0.08);
+    animation: glow 3.6s infinite alternate ease-in-out;
+}
+
+.subtitle-msg {
+    margin: 0;
+    max-width: 34rem;
+    color: var(--text-muted);
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    line-height: 1.7;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    animation: subtitlePulse 3.2s infinite ease-in-out;
+}
+
+
+@keyframes glow {
+    from {
+        transform: scale(1);
+        color: var(--text-main);
+        text-shadow: 0 0 8px rgba(167, 139, 250, 0.10), 0 0 18px rgba(96, 165, 250, 0.08);
+    }
+
+    to {
+        transform: scale(1.02);
+        color: var(--primary-color);
+        text-shadow: 0 0 12px rgba(96, 165, 250, 0.12), 0 0 22px rgba(167, 139, 250, 0.10);
+    }
+}
+
+@keyframes subtitlePulse {
+
+    0%,
+    100% {
+        opacity: 0.86;
+        transform: translateY(0);
+        text-shadow: 0 0 6px rgba(167, 139, 250, 0.06);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(-1px);
+        text-shadow: 0 0 8px rgba(96, 165, 250, 0.08);
+    }
+}
+
+@keyframes welcomeEnter {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes cardRise {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .home-screen {
+        padding: 1.25rem 0.75rem;
+    }
+
+    .home-msg {
+        width: 100%;
+        padding: 1.5rem;
+    }
+
+    .title {
+        letter-spacing: 0.05em;
+    }
+
+    .subtitle-msg {
+        max-width: 28rem;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .home-msg {
+        gap: 0.7rem;
+        padding: 1.2rem;
+    }
+
+    .title {
+        font-size: clamp(2rem, 12vw, 3.1rem);
+        letter-spacing: 0.03em;
+    }
+
+    .subtitle-msg {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+}
