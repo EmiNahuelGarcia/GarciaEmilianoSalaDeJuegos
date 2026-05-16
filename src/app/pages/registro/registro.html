@@ -1,0 +1,102 @@
+<div class="auth-page register-page">
+    <div class="auth-shell register-shell">
+        <form [formGroup]="registerForm" class="auth-card register-card" (ngSubmit)="onSubmit()">
+            <div class="auth-card__header register-card__header">
+                <div class="auth-card__title register-card__title">
+                    <span>Registro de usuario</span>
+                </div>
+                <div class="auth-card__dots register-card__dots"><span></span><span></span><span></span></div>
+            </div>
+
+            <div class="auth-card__body register-card__body">
+                <div class="auth-field register-field">
+                    <input type="text" formControlName="name" placeholder=" " id="name" maxlength="15"
+                        class="auth-field__input"
+                        [class.auth-field__input--error]="name?.invalid && name?.touched" />
+                    <label for="name" class="auth-field__label">NOMBRE</label>
+                    @if (name?.touched && name?.errors) {
+                    @if (name?.getError('required')) {
+                    <small class="auth-field__error">Este campo es obligatorio.</small>
+                    } @else if (name?.getError('minlength'); as MINLENGTH) {
+                    <small class="auth-field__error">Su nombre no puede contener menos de {{ MINLENGTH.requiredLength }} letras.</small>
+                    } @else if (name?.getError('pattern')) {
+                    <small class="auth-field__error">Solo se permiten letras.</small>
+                    }
+                    }
+                </div>
+
+                <div class="auth-field register-field">
+                    <input type="text" formControlName="surname" placeholder=" " id="surname" maxlength="15"
+                        class="auth-field__input"
+                        [class.auth-field__input--error]="surname?.invalid && surname?.touched" />
+                    <label for="surname" class="auth-field__label">APELLIDO</label>
+
+                    @if (surname?.touched && surname?.errors) {
+                    @if (surname?.getError('required')) {
+                    <small class="auth-field__error">Este campo es obligatorio</small>
+                    } @else if (surname?.getError('minlength'); as MINLENGTH) {
+                    <small class="auth-field__error">Su apellido debe tener al menos {{ MINLENGTH.requiredLength }} letras.</small>
+                    } @else if (surname?.getError('pattern')) {
+                    <small class="auth-field__error">Solo se permiten letras.</small>
+                    }
+                    }
+                </div>
+
+                <div class="auth-field register-field">
+                    <input type="email" formControlName="email" id="email" placeholder=" "
+                        class="auth-field__input"
+                        [class.auth-field__input--error]="email?.invalid && email?.touched" />
+                    <label for="email" class="auth-field__label">EMAIL</label>
+
+                    @if (email?.touched && email?.errors) {
+                    @if (email?.getError('required')) {
+                    <small class="auth-field__error">El email es obligatorio.</small>
+                    } @else if (email?.getError('email')) {
+                    <small class="auth-field__error">Ingrese un formato de email valido.</small>
+                    } @else if (email?.getError('pattern')) {
+                    <small class="auth-field__error">Solo se permiten correos de Gmail, Hotmail u Outlook.</small>
+                    }
+                    }
+                </div>
+
+                <div class="auth-field register-field">
+                    <input type="text" formControlName="age" id="age" placeholder=" " maxlength="2"
+                        class="auth-field__input"
+                        [class.auth-field__input--error]="age?.invalid && age?.touched" />
+                    <label for="age" class="auth-field__label">EDAD</label>
+
+                    @if (age?.touched && age?.errors) {
+                    @if (age?.getError('required')) {
+                    <small class="auth-field__error">Este campo es obligatorio</small>
+                    } @else if (age?.getError('min')) {
+                    <small class="auth-field__error">Debes ser mayor de 18 años.</small>
+                    } @else if (age?.getError('pattern')) {
+                    <small class="auth-field__error">Solo se permiten numeros</small>
+                    }
+                    }
+                </div>
+
+                <div class="auth-field register-field">
+                    <input type="password" formControlName="password" id="password" placeholder=" " maxlength="20"
+                        class="auth-field__input"
+                        [class.auth-field__input--error]="password?.invalid && password?.touched" />
+                    <label for="password" class="auth-field__label">CLAVE</label>
+
+                    @if (password?.touched && password?.errors) {
+                    @if (password?.getError('required')) {
+                    <small class="auth-field__error">Este campo es obligatorio</small>
+                    } @else if (password?.getError('minlength'); as MINLENGTH) {
+                    <small class="auth-field__error">Su contraseña no puede ser menor a {{ MINLENGTH.requiredLength }} caracteres</small>
+                    } @else if (password?.getError('pattern')) {
+                    <small class="auth-field__error">Solo caracteres alfanumericos</small>
+                    }
+                    }
+                </div>
+
+                <button data-text="CREAR_CUENTA" type="submit" class="auth-card__submit register-card__submit">
+                    <span class="auth-card__submit-text register-card__submit-text">Crear cuenta</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+.register-shell {
+	--auth-shell-max-width: 520px;
+}
+
+/* Alineamiento vertical centrado para la página de registro */
+.auth-page.register-page {
+	min-height: calc(100vh - var(--nav-height));
+	display: grid;
+	place-items: center;
+	padding: 2rem 1rem;
+}
