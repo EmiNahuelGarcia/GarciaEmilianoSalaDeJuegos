@@ -29,7 +29,13 @@ export const routes: Routes = [
                 path: 'ahorcado',
                 loadComponent: () => import('./games/ahorcado/ahorcado').then((a) => a.Ahorcado),
                 canActivate: [authGuard]
-            },]
+            },
+            {
+                path: 'mayor-menor',
+                loadComponent: () => import('./games/mayor-menor/mayor-menor').then((m) => m.MayorMenor),
+                canActivate: [authGuard]
+            }
+        ]
     },
     {
         path: 'quien-soy',
