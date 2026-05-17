@@ -34,7 +34,7 @@ export class AuthService {
         }
     }
 
-    async login({ email, password }: ILogin): Promise<{ ok : boolean, message?: string }> {
+    async login({ email, password }: ILogin): Promise<{ ok: boolean, message?: string }> {
         const { data, error } = await this.supabase.getClient().auth.signInWithPassword({ email, password });
 
         if (error) return { ok: false, message: 'Credenciales inválidas.' };
@@ -69,7 +69,7 @@ export class AuthService {
 
             if (error?.status === 422) {
                 console.error('Error en el registro: El correo ya está registrado.');
-                return {ok : false, message: 'El correo ya está registrado.' };
+                return { ok: false, message: 'El correo ya está registrado.' };
             }
 
             else if (error) {
@@ -79,11 +79,15 @@ export class AuthService {
             if (data.user) {
                 return await this.login({ email, password });
             }
-            
+
             return { ok: false, message: 'Error al registrar el usuario.' };
         } catch (err) {
             console.error('Error inesperado en el registro:', err);
             return { ok: false, message: 'Error inesperado en el registro.' };
         }
+    }
+
+    getUsername() {
+        return this.actualUser()?.user_metadata?.['name'];
     }
 }

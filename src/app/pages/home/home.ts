@@ -13,12 +13,12 @@ export class Home {
   auth = inject(AuthService);
   cards : IJuegoCard[] = [
     {
-      title: 'Juego 1',
-      image: '/assets/placeholder.png',
-      textImage: 'Imagen del Juego 1',
-      nameGame: 'Nombre del Juego 1',
-      descriptionGame: 'Descripción del Juego 1',
-      link: 'https://www.youtube.com/watch?v=c2jprxwkr0k',
+      title: 'El Ahorcado',
+      image: '/assets/ahorcado-assets/ahorcado-portada.png',
+      textImage: 'Imagen del juego ahorcado',
+      nameGame: 'El Ahorcado',
+      descriptionGame: 'trata de adivinar la palabra según la sugerencia de letras, dentro del tiempo limite',
+      link: '/juegos/ahorcado',
       textButton: 'Jugar Ahora'
     },
     {

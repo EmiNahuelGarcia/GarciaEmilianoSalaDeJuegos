@@ -1,0 +1,106 @@
+<div class="container-game">
+	<div class="hud">
+		<div class="user-info">
+			<span class="label">jugador: <b class="name-tag">{{ nombreUsuario }}</b></span>
+		</div>
+
+		<div class="stats">
+			<span>nivel: {{ nivel() }}/3</span>
+			<span class="timerPalabra" [class.warning]="tiempo() > 100">
+				tiempo para responder: {{ tiempo() }} / {{ tiempoMaximo }}s
+			</span>
+			<span class="timerGlobal"> tiempo de juego: {{ tiempoFinal() }}</span>
+		</div>
+
+	</div>
+
+	@if (!jugando() && !cargando() && !transicionNivel() && (vidas() === 6 || gameOver())) {
+		<div class="overlay" [class.sangre]="resultado() === 'derrota'">
+			<div class="modal-terminal">
+				@if (gameOver()) {
+					@if (resultado() === 'derrota') {
+						<div class="final-sprite">
+							<img src="assets/ahorcado-assets/ahorcado-gameOver.png" alt="Ahorcado game over" />
+						</div>
+					} @else if (resultado() === 'victoria') {
+						<div class="final-sprite">
+							<img src="assets/ahorcado-assets/ahorcado-victory.png" alt="Ahorcado victoria" />
+						</div>
+					}
+
+					<h1
+						[class.death-glow]="resultado() === 'derrota'"
+						[class.victory-glow]="resultado() === 'victoria'"
+					>
+						{{ resultado() === 'victoria' ? 'ganaste' : 'game over...' }}
+					</h1>
+
+					<div class="final-info">
+						@if (resultado() === 'derrota') {
+							<p>
+								@if (tiempo() >= tiempoMaximo) {
+									Tiempo agotado.
+								} @else if (vidas() === 0) {
+                                    MORISTE.
+								}
+							</p>
+							<p class="final-info">Nivel: {{ nivel() }}</p>
+							<p>La palabra era: <strong>{{ palabraSecreta() }}</strong></p>
+						}
+					</div>
+
+					<p class="final-info">Duración de partida: {{ tiempoFinal() }}s</p>
+
+					@if (resultado() === 'victoria') {
+                        <p>¡Felicidades! Te has salvado.</p>						
+					}
+
+					<button type="button" (click)="iniciarJuego()" class="btn-terminal">Volver a jugar</button>
+				} @else {
+					<h1 class="modal-title">Iniciar partida</h1>
+					<p>Adivina la palabra seleccionando la letra correcta.</p>
+					<button type="button" (click)="iniciarJuego()" class="btn-terminal">COMENZAR</button>
+				}
+			</div>
+		</div>
+	}
+
+	@if (jugando() || (vidas() === 0 && !gameOver())) {
+		<div class="stage">
+			<div class="contenedor-letras">
+				<p class="pista">"{{ pista() }}"</p>
+				<div class="letras">{{ palabraOculta() || '...' }}</div>
+
+				<div class="container-teclado">
+					<div class="teclado">
+						@for (letra of abecedario; track letra) {
+							<button
+								type="button"
+								(click)="intento(letra)"
+								[disabled]="letrasUsadas().includes(letra) || vidas() === 0 || cargando()"
+								[class.hit]="letrasUsadas().includes(letra) && palabraSecreta().includes(letra)"
+								[class.miss]="letrasUsadas().includes(letra) && !palabraSecreta().includes(letra)"
+							>
+								{{ letra }}
+							</button>
+						}
+					</div>
+				</div>
+
+				<div class="footer-info">
+					<span>Letras acertadas: {{ totalLetrasAcertadas() }}</span>
+					<span>Letra(s) usadas: {{ letrasUsadas().length }}</span>
+				</div>
+			</div>
+
+			<div class="sprite-container">
+				<img [src]="spriteMostrado()" class="dibujo" [class.temblor]="vidas() === 0" alt="Estado del ahorcado" />
+			</div>
+		</div>
+	}
+	@if (cargando() || transicionNivel()) {
+		<div class="loading-overlay">
+			<p>{{ transicionNivel() ? 'SUBIENDO DE NIVEL...' : 'ELIGIENDO PALABRA...' }}</p>
+		</div>
+	}
+</div>

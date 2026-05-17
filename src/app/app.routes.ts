@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { guestGuard } from './guards/guest-guard';
+import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
     {
@@ -20,6 +21,15 @@ export const routes: Routes = [
         path: 'registro',
         canActivate: [guestGuard],
         loadComponent: () => import('./pages/registro/registro').then((m) => m.Registro)
+    },
+    {
+        path: 'juegos',
+        children: [
+            {
+                path: 'ahorcado',
+                loadComponent: () => import('./games/ahorcado/ahorcado').then((a) => a.Ahorcado),
+                canActivate: [authGuard]
+            },]
     },
     {
         path: 'quien-soy',
