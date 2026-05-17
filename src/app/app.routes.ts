@@ -37,6 +37,11 @@ export const routes: Routes = [
     },
 
     {
+        path: 'resultados',
+        loadComponent: () => import('./pages/resultados/resultados').then((m) => m.Resultados),
+        canActivate: [authGuard]       
+    },
+    {
         path: '**',
         loadComponent: () => import('./pages/error-page/error-page').then((m) => m.ErrorPage)
     },
