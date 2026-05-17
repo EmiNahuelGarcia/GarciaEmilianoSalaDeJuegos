@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { AuthService } from '../../services/auth';
 import { SupabaseService } from '../../services/supabase';
+import { AudioService } from '../../services/audio';
 
 @Component({
   selector: 'app-ahorcado',
@@ -12,6 +13,7 @@ import { SupabaseService } from '../../services/supabase';
 export class Ahorcado implements OnInit, OnDestroy {
   auth = inject(AuthService);
   db = inject(SupabaseService);
+  audio = inject(AudioService)
 
   palabraSecreta = signal('');
   pista = signal('');
@@ -48,6 +50,14 @@ export class Ahorcado implements OnInit, OnDestroy {
     { palabra: 'TRANSACCION', pista: 'Unidad de trabajo en bases de datos que debe ser atómica.' },
     { palabra: 'NORMALIZACION', pista: 'Proceso de estructurar datos en una base para reducir redundancia.' },
     { palabra: 'ALGORITMO', pista: 'Conjunto de instrucciones para resolver un problema.' },
+    { palabra: 'RECURSION', pista: 'Técnica donde una función se llama a sí misma.' },
+    { palabra: 'HERENCIA', pista: 'Mecanismo de POO donde una clase deriva de otra.' },
+    { palabra: 'ENCAPSULAMIENTO', pista: 'Ocultación de datos y métodos dentro de una clase.' },
+    { palabra: 'KERNEL', pista: 'Parte central de un sistema operativo que gestiona recursos.' },
+    { palabra: 'VIRTUALIZACION', pista: 'Creación de una versión virtual de algo, como un servidor.' },
+    { palabra: 'DOCKER', pista: 'Plataforma de contenerización para desarrollar, enviar y ejecutar aplicaciones .' },
+    
+
   ];
 
   ngOnInit(): void {
@@ -80,6 +90,7 @@ export class Ahorcado implements OnInit, OnDestroy {
     this.stopCronometroGlobal();
     this.iniciarCronometroGlobal();
     this.cargarNivel();
+    this.audio.playAudioAhorcado();
   }
 
   cargarNivel(): void {
@@ -109,7 +120,7 @@ export class Ahorcado implements OnInit, OnDestroy {
 
     if (!this.palabraSecreta().includes(letra)) {
       this.vidas.update(v => v - 1);
-      this.placeholderSonidoError();
+      this.audio.playEfectoError();
 
       if (this.vidas() === 0) {
         this.morir();
@@ -193,9 +204,9 @@ export class Ahorcado implements OnInit, OnDestroy {
     this.transicionNivel.set(false);
 
     if (resultadoFinal === 'victoria') {
-      this.placeholderMusicaVictoria();
+      this.audio.playMusicaVictoryAhorcado();
     } else {
-      this.placeholderMusicaDerrota();
+      this.audio.playMusicaGameOver();
     }
 
     this.resultado.set(resultadoFinal);
@@ -211,21 +222,13 @@ export class Ahorcado implements OnInit, OnDestroy {
     //await this.placeholderInsertarEstadisticas({ victoria, derrota, tiempoJuego, totalFinal });
   }
 
-  private placeholderSonidoError(): void {
-    return;
-  }
-
-  private placeholderMusicaVictoria(): void {
-    return;
-  }
-
-  private placeholderMusicaDerrota(): void {
-    return;
-  }
 
   ngOnDestroy(): void {
     this.stopCronometro();
     this.stopCronometroGlobal();
+    if (this.audio) {
+      this.audio.stopMusica();
+    }
   }
 
 }
