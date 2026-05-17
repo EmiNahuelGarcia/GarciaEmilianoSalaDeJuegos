@@ -90,4 +90,8 @@ export class AuthService {
     getUsername() {
         return this.actualUser()?.user_metadata?.['name'];
     }
+
+    getUserUuid() {
+        return this.actualUser()?.id;
+    }
 }

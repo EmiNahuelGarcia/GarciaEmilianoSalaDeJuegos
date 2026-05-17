@@ -219,7 +219,7 @@ export class Ahorcado implements OnInit, OnDestroy {
     const totalFinal = this.totalLetrasAcertadas() + letrasNivelActual;
     const tiempoJuego = this.tiempoFinal();
 
-    //await this.placeholderInsertarEstadisticas({ victoria, derrota, tiempoJuego, totalFinal });
+    await this.db.insertStats('ahorcado', victoria, derrota, tiempoJuego, totalFinal, this.auth.getUserUuid(), this.nombreUsuario);
   }
 
 
