@@ -15,7 +15,7 @@
 
 	@if (!jugando() && !cargando() && !terminado()) {
 		<div class="overlay">
-			<div class="modal-terminal">
+			<div class="modal-terminal surface-panel">
 				<div class="rival-showcase">
 					<img src="assets/mayor-menor-assets/yugi.png.png" alt="Yugi, rival del duelo" class="rival-avatar" />
 					<div class="rival-meta">
@@ -24,12 +24,12 @@
 					</div>
 				</div>
 				<h1 class="modal-title">Iniciar partida</h1>
-				<p class="modal-copy">
+				<p class="modal-copy text-block">
 					Compará las estrellas de la carta actual con la siguiente y elegí si es <b>mayor</b> o <b>menor</b>.
 				</p>
 				<div class="rules-row">
-					<span class="status-badge violeta">Mayor = violeta</span>
-					<span class="status-badge rojo">Menor = rojo</span>
+					<span class="chip chip--violeta">Mayor = violeta</span>
+					<span class="chip chip--rojo">Menor = rojo</span>
 				</div>
 				<button type="button" (click)="iniciar()" class="btn-terminal">COMENZAR</button>
 			</div>
@@ -47,39 +47,38 @@
 			<div class="arena-backdrop"></div>
 			<img src="assets/mayor-menor-assets/yugi.png.png" alt="Yugi, rival del duelo" class="arena-rival" />
 			<div class="arena-glow"></div>
-			<div class="contenedor-cartas">
+			<div class="contenedor-cartas surface-panel">
 				<div class="duel-head">
-					<p class="pista">Elegí la próxima jugada según el nivel de estrellas.</p>
+					<p class="pista text-block">Elegí la próxima jugada según el nivel de estrellas.</p>
 					<div class="duel-legend">
-						<span class="status-badge violeta">Mayor</span>
-						<span class="status-badge rojo">Menor</span>
+						<span class="chip chip--violeta">Mayor</span>
+						<span class="chip chip--rojo">Menor</span>
 					</div>
 				</div>
 
 				<div class="mesa-cartas">
-					<div class="carta-box carta-actual">
+					<div class="carta-box comparison-surface carta-actual">
 						<div class="card-topline">
-							<span class="card-label">Carta actual</span>
+							<span class="chip chip--soft">Carta actual</span>
 							<span class="card-starhint">nivel {{ cartaActual()?.nivel }}</span>
 						</div>
 						@if (cartaActual()) {
 							<img [src]="cartaActual()?.imagen" [alt]="cartaActual()?.nombre || 'Carta actual'" class="carta-img" />
 							<div class="carta-info">
-								<b>{{ cartaActual()?.nombre }}</b>
-								<span>Nivel {{ cartaActual()?.nivel }}</span>
+								<b>Nivel {{ cartaActual()?.nivel }}</b>
 							</div>
 						} @else {
 							<div class="empty-card">Sin carta</div>
 						}
 					</div>
 
-					<div class="comparison-card">
-						<div class="comparison-top">Tu decisión</div>
-						<p class="comparison-copy">¿La próxima carta tendrá más o menos estrellas?</p>
+					<div class="comparison-card comparison-surface">
+						<div class="chip chip--soft">Tu decisión</div>
+						<p class="comparison-copy text-block">¿La próxima carta tendrá más o menos estrellas?</p>
 						<div class="comparison-buttons">
 							<button
 								type="button"
-								class="btn-choice btn-mayor"
+								class="btn-choice btn-choice--mayor"
 								(click)="intento('mayor')"
 								[disabled]="!jugando() || cargando() || terminado()"
 							>
@@ -88,7 +87,7 @@
 							</button>
 							<button
 								type="button"
-								class="btn-choice btn-menor"
+								class="btn-choice btn-choice--menor"
 								(click)="intento('menor')"
 								[disabled]="!jugando() || cargando() || terminado()"
 							>
@@ -109,7 +108,7 @@
 
 	@if (terminado() && resultado() !== '') {
 		<div class="overlay result-overlay" [class.sangre]="resultado() === 'derrota'">
-			<div class="modal-terminal result-modal" [class.victory]="resultado() === 'victoria'" [class.defeat]="resultado() === 'derrota'">
+			<div class="modal-terminal surface-panel result-modal" [class.victory]="resultado() === 'victoria'" [class.defeat]="resultado() === 'derrota'">
 				<div class="rival-showcase">
 					<img src="assets/mayor-menor-assets/yugi.png.png" alt="Yugi, rival del duelo" class="rival-avatar" />
 					<div class="rival-meta">
@@ -121,14 +120,14 @@
 					{{ resultado() === 'victoria' ? 'ganaste' : 'game over...' }}
 				</h1>
 
-				<p class="modal-copy">
+				<p class="modal-copy text-block">
 					{{ resultado() === 'victoria' ? 'Le ganaste al mazo.' : 'Te quedaste sin vidas.' }}
 				</p>
 
 				<div class="result-stats">
-					<span>Vidas: {{ vidas() }}</span>
-					<span>Aciertos: {{ aciertosTotales() }}</span>
-					<span>Tiempo: {{ tiempoFinal() }}s</span>
+					<span class="chip chip--soft">Vidas: {{ vidas() }}</span>
+					<span class="chip chip--soft">Aciertos: {{ aciertosTotales() }}</span>
+					<span class="chip chip--soft">Tiempo: {{ tiempoFinal() }}s</span>
 				</div>
 
 				<button type="button" (click)="iniciar()" class="btn-terminal">VOLVER A JUGAR</button>
