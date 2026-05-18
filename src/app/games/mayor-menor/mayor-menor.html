@@ -5,11 +5,11 @@
 		</div>
 
 		<div class="stats">
-			<span class="timerGlobal">tiempo de juego: {{ tiempoFinal() }}s</span>
+			<span>cartas restantes: {{ mazo.length }}</span>
 			<span class="timerPalabra" [class.warning]="tiempoInicio() >= (tiempoMaximo - 5)">
 				tiempo restante: {{ tiempoMaximo - tiempoInicio() }}s
 			</span>
-			<span>cartas restantes: {{ mazo.length }}</span>
+			<span class="timerGlobal">tiempo de juego: {{ tiempoFinal() }}s</span>
 		</div>
 	</div>
 
