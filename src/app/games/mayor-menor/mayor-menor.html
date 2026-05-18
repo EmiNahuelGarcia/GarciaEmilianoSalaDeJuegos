@@ -57,7 +57,7 @@
 				</div>
 
 				<div class="mesa-cartas">
-					<div class="carta-box comparison-surface carta-actual">
+					<div class="carta-box panel-stack panel-stack--tall comparison-surface carta-actual">
 						<div class="card-topline">
 							<span class="chip chip--soft">Carta actual</span>
 							<span class="card-starhint">nivel {{ cartaActual()?.nivel }}</span>
@@ -72,7 +72,7 @@
 						}
 					</div>
 
-					<div class="comparison-card comparison-surface">
+					<div class="comparison-card panel-stack panel-stack--center comparison-surface">
 						<div class="chip chip--soft">Tu decisión</div>
 						<p class="comparison-copy text-block">¿La próxima carta tendrá más o menos estrellas?</p>
 						<div class="comparison-buttons">
@@ -124,10 +124,10 @@
 					{{ resultado() === 'victoria' ? 'Le ganaste al mazo.' : 'Te quedaste sin vidas.' }}
 				</p>
 
-				<div class="result-stats">
-					<span class="chip chip--soft">Vidas: {{ vidas() }}</span>
-					<span class="chip chip--soft">Aciertos: {{ aciertosTotales() }}</span>
-					<span class="chip chip--soft">Tiempo: {{ tiempoFinal() }}s</span>
+					<div class="result-stats">
+						<span class="chip chip--soft chip--result">Vidas: {{ vidas() }}</span>
+						<span class="chip chip--soft chip--result">Aciertos: {{ aciertosTotales() }}</span>
+						<span class="chip chip--soft chip--result">Tiempo: {{ tiempoFinal() }}s</span>
 				</div>
 
 				<button type="button" (click)="iniciar()" class="btn-terminal">VOLVER A JUGAR</button>

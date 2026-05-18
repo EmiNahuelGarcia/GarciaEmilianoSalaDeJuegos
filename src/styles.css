@@ -321,6 +321,10 @@ body {
     background: rgba(167,139,250,0.06);
 }
 
+.text-block {
+    font-family: var(--font-body);
+}
+
 /* Tipografía compartida */
 .nav-header__brand-name,
 .nav-header__link,
