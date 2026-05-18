@@ -99,7 +99,7 @@ export class Ahorcado implements OnInit, OnDestroy {
     this.letrasUsadas.set([]);
     this.vidas.set(6);
     this.tiempo.set(0);
-    this.stopCronometro();
+    this.stopTimer();
 
     setTimeout(() => {
       const pool = this.palabras.filter(p => p.palabra !== this.palabraSecreta());
@@ -135,7 +135,7 @@ export class Ahorcado implements OnInit, OnDestroy {
   verificarVictoriaNivel(): void {
     if (this.palabraOculta().includes('_')) return;
 
-    this.stopCronometro();
+    this.stopTimer();
     this.jugando.set(false);
     this.transicionNivel.set(true);
 
@@ -152,19 +152,19 @@ export class Ahorcado implements OnInit, OnDestroy {
     }
 
     this.transicionNivel.set(false);
-    this.finalizar('victoria');
+    this.terminarJuego('victoria');
   }
 
   morir(): void {
     this.jugando.set(false);
-    this.stopCronometro();
+    this.stopTimer();
 
     setTimeout(() => {
-      this.finalizar('derrota');
+      this.terminarJuego('derrota');
     }, 3000);
   }
 
-  stopCronometro(): void {
+  stopTimer(): void {
     if (this.timerInterval) {
       clearInterval(this.timerInterval);
       this.timerInterval = null;
@@ -172,7 +172,7 @@ export class Ahorcado implements OnInit, OnDestroy {
   }
 
   iniciarCronometro(): void {
-    this.stopCronometro();
+    this.stopTimer();
 
     this.timerInterval = setInterval(() => {
       this.tiempo.update(t => t + 1);
@@ -198,8 +198,8 @@ export class Ahorcado implements OnInit, OnDestroy {
     this.cronometroGlobal = null;
   }
 
-  async finalizar(resultadoFinal: 'victoria' | 'derrota'): Promise<void> {
-    this.stopCronometro();
+  async terminarJuego(resultadoFinal: 'victoria' | 'derrota'): Promise<void> {
+    this.stopTimer();
     this.stopCronometroGlobal();
     this.transicionNivel.set(false);
 
@@ -224,11 +224,10 @@ export class Ahorcado implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
-    this.stopCronometro();
+    this.stopTimer();
     this.stopCronometroGlobal();
     if (this.audio) {
       this.audio.stopMusica();
     }
   }
-
 }

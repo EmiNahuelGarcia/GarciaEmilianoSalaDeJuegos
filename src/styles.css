@@ -54,6 +54,14 @@ html {
     --bg-primary: var(--bg-card);
     --glow-purple-soft: 0 0 20px rgba(167, 139, 250, 0.20);
     --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.24);
+    /* Mayor-Menor  variables  */
+    --mm-accent-rgb: 167,139,250;
+    --mm-accent-gradient: linear-gradient(90deg, rgba(167, 139, 250, 0.95), rgba(96, 165, 250, 0.95));
+    --mm-modal-bg: linear-gradient(180deg, rgba(31, 41, 55, 0.92), rgba(17, 24, 39, 0.95));
+    --mm-panel-bg: linear-gradient(180deg, rgba(18, 22, 40, 0.34), rgba(11, 14, 27, 0.42));
+    --mm-shadow-lg: 0 14px 42px rgba(0, 0, 0, 0.22);
+    --mm-shadow-md: 0 8px 18px rgba(0, 0, 0, 0.10);
+    --mm-btn-shadow: 0 12px 24px rgba(96, 165, 250, 0.18);
 }
 
 body {
