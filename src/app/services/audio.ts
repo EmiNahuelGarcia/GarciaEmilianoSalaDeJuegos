@@ -35,9 +35,9 @@ export class AudioService {
 
 
     playEfectoError() {
-        const quemado = new Audio('assets/ahorcado-assets/ahorcado-error.ogg');
-        quemado.volume = 0.2;
-        quemado.play();
+        const error = new Audio('assets/ahorcado-assets/ahorcado-error.ogg');
+        error.volume = 0.2;
+        error.play();
     }
 
     playMusicaGameOver() {
@@ -54,4 +54,44 @@ export class AudioService {
         this.audio.volume = 0.1;
         this.audio.play();
     }
+
+    //mayor-menor
+
+    playAudioMayorMenor() {
+        this.stopMusica();
+        this.audio.loop = true;
+        this.audio.src = 'assets/mayor-menor-assets/mayor-menor-song.ogg';
+        this.audio.volume = 0.05;
+        this.audio.play();
+    }
+
+    playEfectoErrorMayorMenor() {
+        const error = new Audio('assets/mayor-menor-assets/mayor-menor-error.ogg');
+        error.volume = 0.2;
+        error.play();
+    }
+
+
+    playEfectoVictoriaMayorMenor() {
+        this.pausarMusica();
+        this.audio.src = 'assets/mayor-menor-assets/mayor-menor-victory.ogg';
+        this.audio.volume = 0.1;
+        this.audio.play();
+    }
+
+    playMusicaGameOverMayorMenor() {
+        this.pausarMusica();
+        this.audio.loop = false;
+        this.audio.src = 'assets/mayor-menor-assets/mayor-menor-defeat.ogg';
+        this.audio.volume = 0.3;
+        this.audio.play();
+    }
+
+    playAciertoMayorMenor() {
+        const acierto = new Audio('assets/mayor-menor-assets/mayor-menor-acierto.ogg');
+        acierto.volume = 0.2;
+        acierto.play();
+    }
+
+
 }

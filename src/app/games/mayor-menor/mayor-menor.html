@@ -110,24 +110,24 @@
 		<div class="overlay result-overlay" [class.sangre]="resultado() === 'derrota'">
 			<div class="modal-terminal surface-panel result-modal" [class.victory]="resultado() === 'victoria'" [class.defeat]="resultado() === 'derrota'">
 				<div class="rival-showcase">
-					<img src="assets/mayor-menor-assets/yugi.png.png" alt="Yugi, rival del duelo" class="rival-avatar" />
-					<div class="rival-meta">
-						<span class="rival-tag">Rival</span>
-						<b>Yugi</b>
-					</div>
+					<img
+						[src]="resultado() === 'victoria' ? 'assets/mayor-menor-assets/yugi-derrotado.png' : 'assets/mayor-menor-assets/yugi-ganador.png'"
+						[alt]="resultado() === 'victoria' ? 'Yugi derrotado' : 'Yugi ganador'"
+						class="rival-avatar"
+					/>
 				</div>
 				<h1 [class.death-glow]="resultado() === 'derrota'" [class.victory-glow]="resultado() === 'victoria'">
-					{{ resultado() === 'victoria' ? 'ganaste' : 'game over...' }}
+					{{ resultado() === 'victoria' ? 'Ganaste' : 'Fuiste al reino de las sombras...' }}
 				</h1>
 
 				<p class="modal-copy text-block">
-					{{ resultado() === 'victoria' ? 'Le ganaste al mazo.' : 'Te quedaste sin vidas.' }}
+					{{ resultado() === 'victoria' ? 'Venciste al corazón de las cartas.' : 'Te quedaste sin vidas.' }}
 				</p>
 
 					<div class="result-stats">
-						<span class="chip chip--soft chip--result">Vidas: {{ vidas() }}</span>
-						<span class="chip chip--soft chip--result">Aciertos: {{ aciertosTotales() }}</span>
-						<span class="chip chip--soft chip--result">Tiempo: {{ tiempoFinal() }}s</span>
+						<span class="chip chip--soft">Vidas: {{ vidas() }}</span>
+						<span class="chip chip--soft">Aciertos: {{ aciertosTotales() }}</span>
+						<span class="chip chip--soft">Tiempo: {{ tiempoFinal() }}s</span>
 				</div>
 
 				<button type="button" (click)="iniciar()" class="btn-terminal">VOLVER A JUGAR</button>

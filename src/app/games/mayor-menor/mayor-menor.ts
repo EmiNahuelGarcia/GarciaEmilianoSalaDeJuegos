@@ -55,12 +55,11 @@ export class MayorMenor implements OnInit, OnDestroy {
     this.cargando.set(true);
     this.jugando.set(false);
     this.tiempoInicio.set(0);
-    //placeholder intro
     setTimeout(() => {
       this.cartaActual.set(this.mazo.pop() || null);
       this.cargando.set(false);
       this.jugando.set(true);
-      //musica del juego
+      this.audio.playAudioMayorMenor();
       this.startTimer();
     }, 800);
   }

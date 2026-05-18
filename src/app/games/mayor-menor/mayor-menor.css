@@ -397,27 +397,32 @@
 
 .rival-showcase {
 	display: grid;
-	grid-template-columns: minmax(7.5rem, 10rem) 1fr;
+	grid-template-columns: 1fr;
+	justify-items: center;
 	align-items: center;
-	gap: 1rem;
+	gap: 0.75rem;
 	padding: 0.65rem 0.9rem;
 	background: rgba(10, 13, 25, 0.04);
-	text-align: left;
+	text-align: center;
 }
 
 .rival-avatar {
 	width: min(9.5rem, 28vw);
 	display: block;
-	margin: 0 auto;
+	margin: 0;
 	object-fit: contain;
+}
+
+.result-modal .rival-avatar {
+    width: min(20rem, 50vw);
 }
 
 .rival-meta {
 	display: grid;
-	text-align: left;
+	text-align: center;
 	line-height: 1.1;
 	align-content: center;
-	justify-items: start;
+	justify-items: center;
 	gap: 0.25rem;
 }
 
