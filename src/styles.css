@@ -277,7 +277,6 @@ body {
 @media (max-width: 480px) {
     .auth-page {
         padding: 1rem;
-        min-height: 100vh;
     }
 
     .auth-card {
