@@ -4,13 +4,31 @@
         <p class="subtitulo">Ranking mundial</p>
     </header>
 
+    <section class="selector-juegos" aria-label="Selector de ranking">
+        @for (juego of juegos; track juego.id) {
+            <button
+                type="button"
+                class="game-tab"
+                [class.active]="juego.id === juegoActivo().id"
+                [disabled]="!juego.enabled"
+                [attr.aria-pressed]="juego.id === juegoActivo().id"
+                (click)="seleccionarJuego(juego.id)"
+            >
+                <span class="game-tab-label">{{ juego.label }}</span>
+                @if (!juego.enabled) {
+                    <span class="game-tab-state">Próximamente</span>
+                }
+            </button>
+        }
+    </section>
+
     @if (scores().length === 0) {
         <div class="empty-state">
             <app-spinner [isLoading]="loading()" [mensaje]="'No hay resultados todavía.'"></app-spinner>           
         </div>
     } @else {
         <section class="info-card">
-            <header class="card-tag">Top 10 — Ahorcado</header>
+            <header class="card-tag">Top 10 — {{ juegoActivo().displayName }}</header>
 
             <div class="table-responsive">
                 <table class="tabla-scores">

@@ -20,7 +20,7 @@ export class MayorMenor implements OnInit, OnDestroy {
   cargando = signal(false);
   resultado = signal<'victoria' | 'derrota' | ''>('');
   vidas = signal(5);
-  nombreUsuario = signal<string>('Invitado');
+  nombreUsuario = "Invitado";
   aciertosTotales = signal(0);
   tiempoInicio = signal(0);
   tiempoMaximo: number = 20;
@@ -33,7 +33,7 @@ export class MayorMenor implements OnInit, OnDestroy {
   cartaTemblorTimeout: any;
 
   ngOnInit(): void {
-    this.nombreUsuario.set(this.auth.getUsername() || 'Invitado');
+    this.nombreUsuario = this.auth.getUsername() || 'Invitado';
   }
 
   inicializarMazo() {
@@ -161,7 +161,7 @@ export class MayorMenor implements OnInit, OnDestroy {
     this.cronometroGlobal = null;
   }
 
-  terminarJuego(resultado: 'victoria' | 'derrota') {
+  async terminarJuego(resultado: 'victoria' | 'derrota') {
     this.terminado.set(true);
     this.stopTimer();
     this.stopCronometroGlobal();
@@ -178,7 +178,7 @@ export class MayorMenor implements OnInit, OnDestroy {
     const tiempo_de_juego = this.tiempoFinal();
     const puntos = this.aciertosTotales();
 
-    //aca tengo que poner las stats en la base de datos 
+    await this.db.insertStats('mayorMenor', victoria, derrota, tiempo_de_juego, puntos, this.auth.getUserUuid(), this.nombreUsuario); 
   }
 
   ngOnDestroy(): void {
