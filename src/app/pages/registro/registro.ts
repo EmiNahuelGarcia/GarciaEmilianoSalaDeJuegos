@@ -1,17 +1,20 @@
 import { Component, inject, signal } from '@angular/core';
+import { AuthService } from '../../services/auth';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-
+import { IRegister } from '../../models/registro-interface';
+import { SpinnerComponent } from '../../shared/spinner/spinnerComponent';
 
 
 @Component({
   selector: 'app-registro',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, SpinnerComponent],
   templateUrl: './registro.html',
   styleUrl: './registro.css',
 })
 export class Registro {
-  //placeholder para injectar el service de auth de sprint 2
+  auth = inject(AuthService);
   error = signal('');
+  loading = signal(false);
   registerForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]*$'), Validators.minLength(3), Validators.maxLength(15)]),
     surname: new FormControl('', [Validators.minLength(3), Validators.maxLength(15), Validators.pattern('^[a-zA-Z]*$'), Validators.required]),
@@ -25,7 +28,22 @@ export class Registro {
   });
 
   async onSubmit() {
-    //placeholder para el submit del registro del sprint 2
+    if (this.registerForm.invalid) {
+      this.error.set('Por favor, complete todos los campos correctamente.');
+      return;
+    }
+
+    this.loading.set(true);
+
+    try {
+      const response = await this.auth.register(this.registerForm.value as IRegister);
+
+      if (!response.ok) {
+        this.error.set(response.message || 'No se pudo registrar el usuario.' );
+      }
+    } finally {
+      this.loading.set(false);
+    }
   }
 
   get name() {

@@ -36,3 +36,70 @@ En el sprint 1 se realizó la creación inicial del proyecto y la base de la apl
 	- Visualización del nombre, imagen de perfil y otros datos del alumno.
 	- Explicación clara de la elección del juego propio y de su forma de jugar.
 - Implementación de un favicon propio.
+
+## Descripción del Sprint 2
+
+En el sprint 2 se completó la funcionalidad de autenticación y se implementó el sistema de navegación condicionada. Se trabajó en la integración con Supabase para validación de usuarios, registro seguro y gestión de sesiones. También se implementaron los guards de ruta para proteger el acceso a funcionalidades según el estado de autenticación del usuario.
+
+### Actividades realizadas
+
+- **Funcionalidad del componente Home (Bienvenida)**:
+	- Implementación de lógica condicional que muestra contenido diferente según el estado de autenticación del usuario.
+	- Si el usuario **NO está logueado**: Muestra un mensaje de bienvenida: *"BIENVENIDO A LA SALA DE ESPAR GAMES"*.
+	- Si el usuario **SÍ está logueado**: Muestra una galería con tarjetas de los 4 juegos disponibles.
+	- Integración con el servicio de autenticación para verificar el usuario actual.
+
+- **Funcionalidad del componente Login**:
+	- Validación de credenciales contra Supabase usando email y contraseña.
+	- Validaciones reactivas en tiempo real:
+		- Email: Validación de formato correcto.
+		- Contraseña: Alfanumérica, 8-20 caracteres.
+	- **3 botones de login rápido** para facilitar pruebas ágiles de la aplicación:
+		- Botón A: `pepe@gmail.com` / `123456abc`
+		- Botón B: `nico@hotmail.com` / `123456Abc`
+		- Botón C: `bausoneitor@outlook.com` / `123456789Abc`
+	- Navegación automática a `/home` tras login exitoso.
+	- Visualización de mensajes de error específicos en caso de credenciales inválidas.
+	- Spinner de carga durante el proceso de autenticación.
+	- Enlace a página de registro.
+	- Toggle de visibilidad de contraseña.
+
+- **Funcionalidad del componente Registro**:
+	- Formulario funcional para registrar nuevos usuarios con los siguientes campos:
+		- **Nombre**: Solo letras, 3-15 caracteres, obligatorio.
+		- **Apellido**: Solo letras, 3-15 caracteres, obligatorio.
+		- **Email**: Validación específica para Gmail, Hotmail y Outlook, obligatorio.
+		- **Edad**: Solo números, rango 18-99 años, obligatorio.
+		- **Contraseña**: Alfanumérica, 8-20 caracteres, obligatorio.
+	- Creación de cuenta en el sistema de autenticación de Supabase.
+	- Guardado de datos del usuario en la base de datos (name, surname, age).
+	- Auto-login automático tras registro exitoso.
+	- Detección y visualización de errores (ej: email ya registrado).
+	- Spinner de carga durante el proceso de registro.
+
+- **Implementación de Guardias de Ruta (Guards)**:
+	- **Guest Guard** (`guestGuard`): Permite el acceso a rutas de login y registro solo si el usuario NO está autenticado. Si el usuario intenta acceder a estas rutas estando logueado, lo redirige a `/home`.
+
+- **Configuración de rutas con protección**:
+	- `/home` → Home (accesible para todos).
+	- `/login` → Login (protegido por `guestGuard`).
+	- `/registro` → Registro (protegido por `guestGuard`).
+	- `/quien-soy` → Quién Soy (accesible para todos).
+
+- **Navegación mejorada**:
+	- Barra de navegación condicional que muestra diferentes opciones según el estado de autenticación:
+		- **Si NO está logueado**: Botones de HOME, LOGIN y REGISTRARSE.
+		- **Si SÍ está logueado**: Muestra HOME, RESULTADOS, nombre del usuario y botón CERRAR SESIÓN.
+	- Funcionamiento automático del logout con redirección a `/home`.
+
+- **Servicio de Autenticación (AuthService)**:
+	- Integración completa con Supabase para manejo de autenticación.
+	- Gestión de estado de usuario mediante signals de Angular.
+	- Métodos implementados:
+		- `login()`: Autentica usuario con email y contraseña.
+		- `register()`: Registra nuevo usuario con validación de duplicados.
+		- `logout()`: Cierra sesión del usuario actual.
+		- `checkSession()`: Verifica si existe una sesión activa.
+	- Monitoreo en tiempo real de cambios de autenticación mediante `onAuthStateChange()`.
+	- Propiedades computed para estado de autenticación e información del usuario.
+

@@ -10,8 +10,7 @@
 
             <div class="auth-card__body login-card__body">
                 <div class="auth-field login-field">
-                    <input type="email" formControlName="email" id="email" placeholder=" "
-                        class="auth-field__input"
+                    <input type="email" formControlName="email" id="email" placeholder=" " class="auth-field__input"
                         [class.auth-field__input--error]="email?.invalid && email?.touched" />
                     <label for="email" class="auth-field__label">EMAIL</label>
 
@@ -32,7 +31,8 @@
                     @if (password?.getError('required')) {
                     <small class="auth-field__error">Este campo es obligatorio</small>
                     } @else if (password?.getError('minlength'); as MINLENGTH) {
-                    <small class="auth-field__error">Su contraseña no puede ser menor a {{ MINLENGTH.requiredLength }} caracteres</small>
+                    <small class="auth-field__error">Su contraseña no puede ser menor a {{ MINLENGTH.requiredLength }}
+                        caracteres</small>
                     } @else if (password?.getError('pattern')) {
                     <small class="auth-field__error">Solo caracteres alfanumericos</small>
                     }
@@ -43,12 +43,31 @@
                     class="auth-card__submit login-card__submit">
                     <span class="auth-card__submit-text login-card__submit-text">Conectar</span>
                 </button>
+                @if (error()) {
+                <div class="auth-field__error">
+                    {{ error() }}
+                </div>
+                }
 
                 <div class="auth-card__signup-prompt flex-center muted-text">
                     <span>¿Sos nuevo?</span>
                     <a routerLink="../registro" class="auth-card__signup-link btn-pill">Registrate</a>
                 </div>
+                <div class="auth-card__quick-access">
+                    <button type="button" class="auth-card__quick-access-btn "
+                        (click)="quickLogin('pepe@gmail.com', '123456abc')"
+                        aria-label="Ingresar como invitado">A</button>
+                    <button type="button" class="auth-card__quick-access-btn "
+                        (click)="quickLogin('nico@hotmail.com', '123456Abc')"
+                        aria-label="Ingresar como invitado">B</button>
+                    <button type="button" class="auth-card__quick-access-btn "
+                        (click)="quickLogin('bausoneitor@outlook.com', '123456789Abc')"
+                        aria-label="Ingresar como invitado">C</button>
+                </div>
+
             </div>
         </form>
     </div>
 </div>
+<app-spinner [isLoading]="loading()" [mensaje]="'Ingresando en Espar Games...'">
+</app-spinner>

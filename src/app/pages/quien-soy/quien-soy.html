@@ -1,3 +1,5 @@
+<app-spinner [isLoading]="loading()" [mensaje]="'Cargando perfil de GitHub...'"></app-spinner>
+
 <div class="auth-page quien-soy-page">
     <div class="profile-container">
         @if (usuarioGitHub()) {
@@ -59,7 +61,7 @@
         </div>
         } @else {
         <div class="profile-loading">
-            <p>Cargando información del perfil...</p>
+            <p class="loading-text">No se pudo cargar el perfil de GitHub.</p>
         </div>
         }
     </div>

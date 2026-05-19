@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-
+import { AuthService } from '../../services/auth';
 
 
 @Component({
@@ -12,14 +12,15 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class Nav {
     router = inject(Router);
-    //placeholder para el service de auth de sprint 2
+    auth = inject(AuthService);
 
     nameUser(): string | null {
-        return 'placeholder'; // Reemplazar con el nombre del usuario obtenido del servicio de autenticación
+        const user = this.auth.actualUser();
+        return user?.user_metadata?.['name'] || 'invitado'
     }
 
     logout() {
-        //placeholder para el service de auth de sprint 2
+        this.auth.logout();
         this.router.navigateByUrl('/home')
     }
 }

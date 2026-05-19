@@ -1,18 +1,20 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-
+import { ILogin } from '../../models/registro-interface';
+import { SpinnerComponent } from '../../shared/spinner/spinnerComponent';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, SpinnerComponent],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class Login {
   router = inject(Router);
+  auth = inject(AuthService);
   showPassword = signal(false);
-  //placeholder para el service del auth de sprint 2
   error = signal('');
   loading = signal(false);
 
@@ -22,8 +24,23 @@ export class Login {
   });
   
   async onSubmit() {
-    //placeholder para el submit del login
-}
+    if (this.loginForm.invalid) {
+      this.error.set('Por favor, ingrese un email válido y una contraseña de 8 a 20 caracteres alfanuméricos.');
+      return;
+    }
+    this.error.set('');
+    this.loading.set(true);
+    try{
+      const response= await this.auth.login(this.loginForm.value as ILogin);
+      if(!response.ok){
+        this.error.set(response.message + " Intentalo de nuevo" || 'Error al iniciar sesión. Por favor, intentalo de nuevo.');
+      }    
+    } catch (error) {
+      this.error.set('Error al iniciar sesión. Por favor, intentalo de nuevo.');
+    } finally {
+      this.loading.set(false);
+    }
+  }
 
   togglePasswordVisibility() {
     this.showPassword.set(!this.showPassword());
@@ -36,8 +53,13 @@ export class Login {
   get password() {
     return this.loginForm.get('password');
   }
+
+  quickLogin(email: string, password: string) {
+    this.loginForm.setValue({ email, password });
+    this.onSubmit();
+
+
 }
 
   
-
-
+}

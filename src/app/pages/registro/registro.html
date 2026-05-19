@@ -11,14 +11,14 @@
             <div class="auth-card__body register-card__body">
                 <div class="auth-field register-field">
                     <input type="text" formControlName="name" placeholder=" " id="name" maxlength="15"
-                        class="auth-field__input"
-                        [class.auth-field__input--error]="name?.invalid && name?.touched" />
+                        class="auth-field__input" [class.auth-field__input--error]="name?.invalid && name?.touched" />
                     <label for="name" class="auth-field__label">NOMBRE</label>
                     @if (name?.touched && name?.errors) {
                     @if (name?.getError('required')) {
                     <small class="auth-field__error">Este campo es obligatorio.</small>
                     } @else if (name?.getError('minlength'); as MINLENGTH) {
-                    <small class="auth-field__error">Su nombre no puede contener menos de {{ MINLENGTH.requiredLength }} letras.</small>
+                    <small class="auth-field__error">Su nombre no puede contener menos de {{ MINLENGTH.requiredLength }}
+                        letras.</small>
                     } @else if (name?.getError('pattern')) {
                     <small class="auth-field__error">Solo se permiten letras.</small>
                     }
@@ -35,7 +35,8 @@
                     @if (surname?.getError('required')) {
                     <small class="auth-field__error">Este campo es obligatorio</small>
                     } @else if (surname?.getError('minlength'); as MINLENGTH) {
-                    <small class="auth-field__error">Su apellido debe tener al menos {{ MINLENGTH.requiredLength }} letras.</small>
+                    <small class="auth-field__error">Su apellido debe tener al menos {{ MINLENGTH.requiredLength }}
+                        letras.</small>
                     } @else if (surname?.getError('pattern')) {
                     <small class="auth-field__error">Solo se permiten letras.</small>
                     }
@@ -43,8 +44,7 @@
                 </div>
 
                 <div class="auth-field register-field">
-                    <input type="email" formControlName="email" id="email" placeholder=" "
-                        class="auth-field__input"
+                    <input type="email" formControlName="email" id="email" placeholder=" " class="auth-field__input"
                         [class.auth-field__input--error]="email?.invalid && email?.touched" />
                     <label for="email" class="auth-field__label">EMAIL</label>
 
@@ -61,8 +61,7 @@
 
                 <div class="auth-field register-field">
                     <input type="text" formControlName="age" id="age" placeholder=" " maxlength="2"
-                        class="auth-field__input"
-                        [class.auth-field__input--error]="age?.invalid && age?.touched" />
+                        class="auth-field__input" [class.auth-field__input--error]="age?.invalid && age?.touched" />
                     <label for="age" class="auth-field__label">EDAD</label>
 
                     @if (age?.touched && age?.errors) {
@@ -86,7 +85,8 @@
                     @if (password?.getError('required')) {
                     <small class="auth-field__error">Este campo es obligatorio</small>
                     } @else if (password?.getError('minlength'); as MINLENGTH) {
-                    <small class="auth-field__error">Su contraseña no puede ser menor a {{ MINLENGTH.requiredLength }} caracteres</small>
+                    <small class="auth-field__error">Su contraseña no puede ser menor a {{ MINLENGTH.requiredLength }}
+                        caracteres</small>
                     } @else if (password?.getError('pattern')) {
                     <small class="auth-field__error">Solo caracteres alfanumericos</small>
                     }
@@ -96,7 +96,14 @@
                 <button data-text="CREAR_CUENTA" type="submit" class="auth-card__submit register-card__submit">
                     <span class="auth-card__submit-text register-card__submit-text">Crear cuenta</span>
                 </button>
+                @if (error()) {
+                <div class="auth-field__error">
+                    {{ error() }}
+                </div>
+                }
             </div>
         </form>
     </div>
 </div>
+<app-spinner [isLoading]="loading()" [mensaje]="'Ingresando en Espar Games...'">
+</app-spinner>

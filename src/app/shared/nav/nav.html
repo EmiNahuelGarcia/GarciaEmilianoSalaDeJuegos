@@ -6,7 +6,26 @@
     </div>
 
     <div class="nav-header__container">
-        
+
+        @if(this.auth.actualUser()){
+        <div class="nav-header__content">
+            <div class="nav-header__links">
+                <a routerLink="/home" routerLinkActive="nav-header__link--active" class="nav-header__link">
+                    HOME
+                </a>
+                <a routerLink="/resultados" routerLinkActive="nav-header__link--active" class="nav-header__link">
+                    RESULTADOS
+                </a>
+            </div>
+            <div class="nav-header__user-panel">
+                <span class="nav-header__user-name">{{ nameUser() }}</span>
+                <button class="nav-header__logout" (click)="logout()">
+                    Cerrar Sesión
+                </button>
+            </div>
+        </div>
+        }
+        @else {
         <div class="nav-header__links">
             <a routerLink="/home" routerLinkActive="nav-header__link--active" class="nav-header__link">
                 HOME
@@ -18,6 +37,6 @@
                 REGISTRARSE
             </a>
         </div>
-        
+        }
     </div>
 </nav>
