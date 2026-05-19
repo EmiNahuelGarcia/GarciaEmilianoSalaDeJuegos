@@ -29,6 +29,8 @@ export class MayorMenor implements OnInit, OnDestroy {
   timerInterval: any;
   mazo: IMayorMenorCard[] = [];
   cartaActual = signal<IMayorMenorCard | null>(null);
+  cartaTemblor = signal(false);
+  cartaTemblorTimeout: any;
 
   ngOnInit(): void {
     this.nombreUsuario.set(this.auth.getUsername() || 'Invitado');
@@ -44,10 +46,10 @@ export class MayorMenor implements OnInit, OnDestroy {
     this.tiempoFinal.set(0);
     this.terminado.set(false);
     this.resultado.set('');
+    this.limpiarTemblor();
     this.inicializarMazo();
     this.iniciarCronometroGlobal();
     this.cargarNivel();
-    //placeholder para el audio
 
   }
 
@@ -72,12 +74,32 @@ export class MayorMenor implements OnInit, OnDestroy {
     this.stopTimer();
     const acierto = (eleccion === 'mayor' && cartaProxima! >= cartaActual!) || (eleccion === 'menor' && cartaProxima! <= cartaActual!);
     if (acierto) {
+      this.audio.playAciertoMayorMenor();
       this.aciertosTotales.update(n => n + 1);
       this.sacarOtraCarta(proximaCarta);
     } else {
+      this.activarTemblor();
       this.restarVida();
       this.sacarOtraCarta(proximaCarta);
     }
+  }
+
+  activarTemblor(): void {
+    this.limpiarTemblor();
+    this.cartaTemblor.set(true);
+    this.cartaTemblorTimeout = setTimeout(() => {
+      this.cartaTemblor.set(false);
+      this.cartaTemblorTimeout = null;
+    }, 350);
+  }
+
+  limpiarTemblor(): void {
+    if (this.cartaTemblorTimeout) {
+      clearTimeout(this.cartaTemblorTimeout);
+      this.cartaTemblorTimeout = null;
+    }
+
+    this.cartaTemblor.set(false);
   }
 
   sacarOtraCarta(proximaCarta: IMayorMenorCard | undefined): void {
@@ -92,11 +114,10 @@ export class MayorMenor implements OnInit, OnDestroy {
   restarVida(): void {
     this.vidas.update(v => v - 1);
     if (this.vidas() <= 0) {
-      //poner musica de derrota
+      this.audio.playMusicaGameOverMayorMenor();
       this.terminarJuego('derrota');
     } else {
-      //poner musica de error
-      console.log('¡Error! Te quedan ' + this.vidas() + ' vidas.');
+      this.audio.playEfectoErrorMayorMenor();
     }
   }
 
@@ -144,6 +165,11 @@ export class MayorMenor implements OnInit, OnDestroy {
     this.terminado.set(true);
     this.stopTimer();
     this.stopCronometroGlobal();
+    if (resultado === 'victoria') {
+      this.audio.playMusicaVictoryMayorMenor();
+    } else {
+      this.audio.playMusicaGameOverMayorMenor();
+    }
     this.jugando.set(false);
     this.resultado.set(resultado);
 
@@ -158,6 +184,7 @@ export class MayorMenor implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.stopTimer();
     this.stopCronometroGlobal();
+    this.limpiarTemblor();
     if (this.audio) {
       this.audio.stopMusica();
     }

@@ -66,13 +66,13 @@ export class AudioService {
     }
 
     playEfectoErrorMayorMenor() {
-        const error = new Audio('assets/mayor-menor-assets/mayor-menor-error.ogg');
+        const error = new Audio('assets/mayor-menor-assets/yugi-error.ogg');
         error.volume = 0.2;
         error.play();
     }
 
 
-    playEfectoVictoriaMayorMenor() {
+    playMusicaVictoryMayorMenor() {
         this.pausarMusica();
         this.audio.src = 'assets/mayor-menor-assets/mayor-menor-victory.ogg';
         this.audio.volume = 0.1;
@@ -88,7 +88,7 @@ export class AudioService {
     }
 
     playAciertoMayorMenor() {
-        const acierto = new Audio('assets/mayor-menor-assets/mayor-menor-acierto.ogg');
+        const acierto = new Audio('assets/mayor-menor-assets/yugi-acierto.ogg');
         acierto.volume = 0.2;
         acierto.play();
     }

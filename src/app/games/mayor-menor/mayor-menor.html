@@ -57,7 +57,7 @@
 				</div>
 
 				<div class="mesa-cartas">
-					<div class="carta-box panel-stack panel-stack--tall comparison-surface carta-actual">
+					<div class="carta-box panel-stack panel-stack--tall comparison-surface carta-actual" [class.temblor]="cartaTemblor()">
 						<div class="card-topline">
 							<span class="chip chip--soft">Carta actual</span>
 							<span class="card-starhint">nivel {{ cartaActual()?.nivel }}</span>
