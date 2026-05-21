@@ -3,10 +3,11 @@ import { ChatService } from '../../services/chatService';
 import { Imensaje } from '../../models/mensaje-interface';
 import { AuthService } from '../../services/auth';
 import { FormsModule } from '@angular/forms';
+import { FormatearFechaPipe } from '../pipes/formatear-fecha.pipe';
 
 @Component({
   selector: 'app-chat',
-  imports: [FormsModule],
+  imports: [FormsModule, FormatearFechaPipe],
   templateUrl: './chat.html',
   styleUrl: './chat.css',
 })
@@ -48,7 +49,6 @@ export class Chat {
     this.chatService.suscribirseAlChat();
     
   }
-
 }
 
 

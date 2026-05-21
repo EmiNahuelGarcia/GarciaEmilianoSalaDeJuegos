@@ -22,7 +22,7 @@
                         </div>
                         <div class="info-item">
                             <span class="info-label">Miembro desde:</span>
-                            <span class="info-value">{{ formatearFecha(usuarioGitHub()!.created_at) }}</span>
+                            <span class="info-value">{{ usuarioGitHub()!.created_at | formatearFecha: 'completo' }}</span>
                         </div>
                         <div class="info-item">
                             <span class="info-label">Repositorios públicos:</span>

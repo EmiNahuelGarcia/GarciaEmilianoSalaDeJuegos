@@ -9,6 +9,7 @@
         <div class="mensajes" [class.propioMensaje]="mensaje.user_uuid === auth.actualUser()?.id">
             <span class="username">{{ mensaje.user_name }}</span>
             <p>{{ mensaje.mensaje }}</p>
+            <small class="timestamp">{{ mensaje.created_at | formatearFecha: 'chat' }}</small>
         </div>
         }
     </div>
