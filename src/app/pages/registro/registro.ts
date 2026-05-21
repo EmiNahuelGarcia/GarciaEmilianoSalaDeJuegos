@@ -16,8 +16,8 @@ export class Registro {
   error = signal('');
   loading = signal(false);
   registerForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z]*$'), Validators.minLength(3), Validators.maxLength(15)]),
-    surname: new FormControl('', [Validators.minLength(3), Validators.maxLength(15), Validators.pattern('^[a-zA-Z]*$'), Validators.required]),
+    name: new FormControl('', [Validators.required, Validators.pattern('^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?: [A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$'), Validators.minLength(3), Validators.maxLength(15)]),
+    surname: new FormControl('', [Validators.minLength(3), Validators.maxLength(15), Validators.pattern('^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?: [A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$'), Validators.required]),
     email: new FormControl('', [
       Validators.required,
       Validators.email,
