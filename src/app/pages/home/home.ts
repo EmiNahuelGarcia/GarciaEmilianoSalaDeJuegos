@@ -13,21 +13,21 @@ export class Home {
   auth = inject(AuthService);
   cards : IJuegoCard[] = [
     {
-      title: 'Juego 1',
-      image: '/assets/placeholder.png',
-      textImage: 'Imagen del Juego 1',
-      nameGame: 'Nombre del Juego 1',
-      descriptionGame: 'Descripción del Juego 1',
-      link: 'https://www.youtube.com/watch?v=c2jprxwkr0k',
+      title: 'El Ahorcado',
+      image: '/assets/ahorcado-assets/ahorcado-portada.png',
+      textImage: 'Imagen del juego ahorcado',
+      nameGame: 'El Ahorcado',
+      descriptionGame: 'trata de adivinar la palabra según la sugerencia de letras, dentro del tiempo limite',
+      link: '/juegos/ahorcado',
       textButton: 'Jugar Ahora'
     },
     {
-      title: 'Juego 2',
-      image: '/assets/placeholder.png',
-      textImage: 'Imagen del Juego 2',
-      nameGame: 'Nombre del Juego 2',
-      descriptionGame: 'Descripción del Juego 2',
-      link: 'https://www.youtube.com/watch?v=c2jprxwkr0k',
+      title: 'Mayor o Menor',
+      image: '/assets/mayor-menor-assets/mayor-menor-portada.png',
+      textImage: 'Imagen del juego mayor o menor',
+      nameGame: 'Mayor o Menor',
+      descriptionGame: 'Adivina si el siguiente número de nivel de monstruo es mayor o menor que el actual',
+      link: '/juegos/mayor-menor',
       textButton: 'Jugar Ahora'
     },
     {

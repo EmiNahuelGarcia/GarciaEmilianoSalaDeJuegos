@@ -1,0 +1,60 @@
+<div class="ranking-container">
+    <header class="ranking-header">
+        <h2 class="titulo-resultados">Resultados Globales</h2>
+        <p class="subtitulo">Ranking mundial</p>
+    </header>
+
+    <section class="selector-juegos" aria-label="Selector de ranking">
+        @for (juego of juegos; track juego.id) {
+            <button
+                type="button"
+                class="game-tab"
+                [class.active]="juego.id === juegoActivo().id"
+                [disabled]="!juego.enabled"
+                [attr.aria-pressed]="juego.id === juegoActivo().id"
+                (click)="seleccionarJuego(juego.id)"
+            >
+                <span class="game-tab-label">{{ juego.label }}</span>
+                @if (!juego.enabled) {
+                    <span class="game-tab-state">Próximamente</span>
+                }
+            </button>
+        }
+    </section>
+
+    @if (scores().length === 0) {
+        <div class="empty-state">
+            <app-spinner [isLoading]="loading()" [mensaje]="'No hay resultados todavía.'"></app-spinner>           
+        </div>
+    } @else {
+        <section class="info-card">
+            <header class="card-tag">Top 10 — {{ juegoActivo().displayName }}</header>
+
+            <div class="table-responsive">
+                <table class="tabla-scores">
+                    <thead>
+                        <tr>
+                            <th class="col-rank">Numero</th>
+                            <th class="col-usuario">Jugador</th>
+                            <th class="col-victorias">Victorias</th>
+                            <th class="col-aciertos">Aciertos</th>
+                            <th class="col-tiempo">Tiempo (s)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            @for (item of scores(); track item.id) {
+                                <tr class="results-row" [class.top-row]="scores().indexOf(item) < 3">
+                                    <td class="col-rank">{{ scores().indexOf(item) + 1 }}</td>
+                                    <td class="col-player">{{ item.user || item.userName || 'Invitado' }}</td>
+                                    <td class="col-wins">{{ item.partidas_ganadas || 0 }}</td>
+                                    <td class="col-aciertos">{{ item.aciertos || 0 }}</td>
+                                    <td class="col-tiempo">{{ item.tiempo_finalizacion ?? '-' }}</td>
+                                </tr>
+                            }
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    }
+
+</div>

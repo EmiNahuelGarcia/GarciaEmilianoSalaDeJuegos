@@ -1,9 +1,10 @@
 import { Component, input, InputSignal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { IJuegoCard } from '../../../models/juegos-card-interface';
 
 @Component({
     selector: 'app-juegos-card',
-    imports: [],
+    imports: [RouterLink],
     templateUrl: './juegos-card.html',
     styleUrl: './juegos-card.css',
 })

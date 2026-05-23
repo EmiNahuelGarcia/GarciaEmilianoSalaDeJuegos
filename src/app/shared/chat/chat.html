@@ -1,0 +1,30 @@
+<div class="chat-wrapper" [class.abierto]="abierto">
+    <div class="chat-header" (click)="toggleChat()">
+        <span>Chat global</span>
+    </div>
+</div>
+<div class="chat-body">
+    <div id="chat-container">
+        @for (mensaje of chatService.mensajes(); track mensaje.id) {
+        <div class="mensajes" [class.propioMensaje]="mensaje.user_uuid === auth.actualUser()?.id">
+            <span class="username">{{ mensaje.user_name }}</span>
+            <p>{{ mensaje.mensaje }}</p>
+            <small class="timestamp">{{ mensaje.created_at | formatearFecha: 'chat' }}</small>
+        </div>
+        }
+    </div>
+    <div class="chat-input">
+        <input
+            name="mensaje"
+            id="mensaje"
+            type="text"
+            placeholder="Escribí un mensaje..."
+            autocomplete="off"
+            [(ngModel)]="contentMsj"
+            (keydown.enter)="enviarMensaje()"
+        >
+        <button type="button" (click)="enviarMensaje()">
+            Enviar
+        </button>
+    </div>
+</div>

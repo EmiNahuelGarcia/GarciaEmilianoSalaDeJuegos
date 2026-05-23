@@ -7,7 +7,6 @@
                 </div>
                 <div class="auth-card__dots login-card__dots"><span></span><span></span><span></span></div>
             </div>
-
             <div class="auth-card__body login-card__body">
                 <div class="auth-field login-field">
                     <input type="email" formControlName="email" id="email" placeholder=" " class="auth-field__input"
@@ -38,7 +37,6 @@
                     }
                     }
                 </div>
-
                 <button data-text="CONECTAR" type="submit" [disabled]="loginForm.invalid"
                     class="auth-card__submit login-card__submit">
                     <span class="auth-card__submit-text login-card__submit-text">Conectar</span>
@@ -48,14 +46,13 @@
                     {{ error() }}
                 </div>
                 }
-
                 <div class="auth-card__signup-prompt flex-center muted-text">
                     <span>¿Sos nuevo?</span>
                     <a routerLink="../registro" class="auth-card__signup-link btn-pill">Registrate</a>
                 </div>
                 <div class="auth-card__quick-access">
                     <button type="button" class="auth-card__quick-access-btn "
-                        (click)="quickLogin('pepe@gmail.com', '123456abc')"
+                        (click)="quickLogin('nene@outlook.com', '123456abc')"
                         aria-label="Ingresar como invitado">A</button>
                     <button type="button" class="auth-card__quick-access-btn "
                         (click)="quickLogin('nico@hotmail.com', '123456Abc')"
