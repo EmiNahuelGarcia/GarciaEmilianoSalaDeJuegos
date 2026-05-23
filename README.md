@@ -103,3 +103,24 @@ En el sprint 2 se completó la funcionalidad de autenticación y se implementó 
 	- Monitoreo en tiempo real de cambios de autenticación mediante `onAuthStateChange()`.
 	- Propiedades computed para estado de autenticación e información del usuario.
 
+	## Descripción del Sprint 3
+
+	En el sprint 3 se completó la funcionalidad Chat en tiempo real. El foco estuvo en completar los dos primeros juegos en sus versiones finales, asegurar la persistencia y visualización de estadísticas, mejorar la robustez de la aplicación, creacion de pipes y fixes pequeños.
+
+	### Actividades realizadas
+
+	- Implementación de los el ahorcado y mayor-menor anteriormente mostrados como placeholders en el `Home`.
+	- Integración completa de rankings/estadísticas con Supabase: guardado al finalizar cada partida y listado de los mejores (top 10) en la sección `Resultados`.
+	- Manejo de errores en UI (mensajes visibles para fallo de login/registro).
+	- Validación visual y accesibilidad básica en pantallas críticas (login, registro, home, juegos y resultados).
+	- Creacion de Chat en tiempo real con persistencia
+
+	### Criterios de aceptación
+
+	- **Autenticación:** Registro y login funcionan (auto-login tras registro). Los tres botones de login rápido permiten probar credenciales en desarrollo.
+	- **Juegos:** Las dos primeras tarjetas en `Home` abren juegos jugables; al finalizar una partida se persisten las estadísticas (victoria/derrota, tiempo, puntos).
+	- **Resultados:** La vista `Resultados` muestra correctamente el top 10 por `aciertos` para cada juego y permite cambiar entre juegos.
+	- **Chat:** Creado el Chat en tiempo real, junto a su tabla con supabase, con estilo personalizado para los mensajes propios y los de otras personas, con persistencia en la base de datos
+	
+	
+
