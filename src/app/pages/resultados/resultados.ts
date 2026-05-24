@@ -19,7 +19,7 @@ export class Resultados {
   juegos: IJuegoRanking[] = [
     { id: 'ahorcado', label: 'Ahorcado', displayName: 'Ahorcado', enabled: true },
     { id: 'mayorMenor', label: 'Mayor - Menor', displayName: 'Mayor - Menor', enabled: true },
-    { id: 'juego-3', label: 'Juego 3', displayName: 'Juego 3', enabled: false },
+    { id: 'preguntados', label: 'Preguntados', displayName: 'Preguntados', enabled: true },
     { id: 'juego-4', label: 'Juego 4', displayName: 'Juego 4', enabled: false },
   ];
   juegoActivo = computed(
@@ -31,7 +31,7 @@ export class Resultados {
   }
 
   seleccionarJuego(juego: JuegoId) {
-    if (juego !== 'ahorcado' && juego !== 'mayorMenor') {
+    if (juego !== 'ahorcado' && juego !== 'mayorMenor' && juego !== 'preguntados') {
       return;
     }
 
