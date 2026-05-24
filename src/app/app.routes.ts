@@ -35,6 +35,11 @@ export const routes: Routes = [
                 path: 'mayor-menor',
                 loadComponent: () => import('./games/mayor-menor/mayor-menor').then((m) => m.MayorMenor),
                 canActivate: [authGuard]
+            },
+            {
+                path: 'preguntados',
+                loadComponent: () => import('./games/preguntados/preguntados').then((p) => p.Preguntados),
+                canActivate: [authGuard]
             }
         ]
     },

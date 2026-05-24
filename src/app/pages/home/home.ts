@@ -31,12 +31,12 @@ export class Home {
       textButton: 'Jugar Ahora'
     },
     {
-      title: 'Juego 3',
-      image: '/assets/placeholder.png',
-      textImage: 'Imagen del Juego 3',
-      nameGame: 'Nombre del Juego 3',
-      descriptionGame: 'Descripción del Juego 3',
-      link: 'https://www.youtube.com/watch?v=c2jprxwkr0k',
+      title: 'Preguntados',
+      image: '/assets/preguntados-assets/preguntados-portada.png',
+      textImage: 'Imagen del juego preguntados',
+      nameGame: 'Preguntados',
+      descriptionGame: 'Adivina las respuestas a preguntas de cultura anime dentro del tiempo limite',
+      link: '/juegos/preguntados',
       textButton: 'Jugar Ahora'
     },
     {

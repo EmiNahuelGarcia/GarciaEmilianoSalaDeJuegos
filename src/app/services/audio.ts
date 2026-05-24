@@ -93,5 +93,42 @@ export class AudioService {
         acierto.play();
     }
 
+    //preguntados
+    playAciertoPreguntados() {
+        const acierto = new Audio('assets/preguntados-assets/preguntados-acierto.ogg');
+        acierto.volume = 0.2;
+        acierto.play();
+    }
 
+    playErrorPreguntados() {
+        const error = new Audio('assets/preguntados-assets/preguntados-error.ogg');
+        error.volume = 0.2;
+        error.play();
+    }
+
+    playMusicaPreguntados() {
+        this.stopMusica();
+        this.audio.loop = true;
+        this.audio.src = 'assets/preguntados-assets/preguntados-song.ogg';
+        this.audio.volume = 0.06;
+        this.audio.play();
+    }
+
+    playMusicaVictoryPreguntados() {
+        this.pausarMusica();
+        this.audio.loop = false;
+        this.audio.src = 'assets/preguntados-assets/preguntados-musicaVictoria.ogg';
+        this.audio.volume = 0.1;
+        this.audio.play();
+    }
+
+    playMusicaGameOverPreguntados() {
+        this.pausarMusica();
+        this.audio.loop = false;
+        this.audio.src = 'assets/preguntados-assets/preguntados-musicaDerrota.ogg';
+        this.audio.volume = 0.2;
+        this.audio.play();
+    }
+
+    //Froggy
 }
