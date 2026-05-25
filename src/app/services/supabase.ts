@@ -9,6 +9,8 @@ export class SupabaseService {
     private client: SupabaseClient;
     ahorcadoTable: PostgrestQueryBuilder<any, any, any, 'ahorcadoScore', unknown>;
     mayorMenorTable: PostgrestQueryBuilder<any, any, any, 'mayorMenorScore', unknown>;
+    preguntadosTable: PostgrestQueryBuilder<any, any, any, 'preguntadosScore', unknown>;
+    froggyTable: PostgrestQueryBuilder<any, any, any, 'froggyScore', unknown>;
 
     constructor() {
         const supabaseURL = environment.supabaseUrl;
@@ -16,16 +18,20 @@ export class SupabaseService {
         this.client = createClient(supabaseURL, supabaseKey);
         this.ahorcadoTable = this.client.from('ahorcadoScore');
         this.mayorMenorTable = this.client.from('mayorMenorScore');
+        this.preguntadosTable = this.client.from('preguntadosScore');
+        this.froggyTable = this.client.from('froggyScore');
     }
 
     getClient(): SupabaseClient {
         return this.client;
     }
 
-    async getUltimapartida(juego: 'ahorcado' | 'mayorMenor', user_uuid: string | null) {
+    async getUltimapartida(juego: 'ahorcado' | 'mayorMenor' | 'preguntados' | 'froggy', user_uuid: string | null) {
         const tabladeJuego = {
             ahorcado: this.ahorcadoTable,
-            mayorMenor: this.mayorMenorTable
+            mayorMenor: this.mayorMenorTable,
+            preguntados: this.preguntadosTable,
+            froggy: this.froggyTable
         };
         const tabla = tabladeJuego[juego];
         const { data, error } = await tabla.select('*').eq('user_uuid', user_uuid)
@@ -36,10 +42,12 @@ export class SupabaseService {
         return data?.[0] || null;
     }
 
-    async insertStats(juego: 'ahorcado' | 'mayorMenor', victoria: number, derrota: number, tiempo_de_juego: number, puntos: number, user_uuid?: string | null, userName?: string | null) {
+    async insertStats(juego: 'ahorcado' | 'mayorMenor' | 'preguntados' | 'froggy', victoria: number, derrota: number, tiempo_de_juego: number, puntos: number, user_uuid?: string | null, userName?: string | null) {
         const tabladeJuego = {
             ahorcado: this.ahorcadoTable,
-            mayorMenor: this.mayorMenorTable
+            mayorMenor: this.mayorMenorTable,
+            preguntados: this.preguntadosTable,
+            froggy: this.froggyTable
         };
         const tabla = tabladeJuego[juego];
         const ultima_partida = await this.getUltimapartida(juego, user_uuid ?? null);
@@ -63,10 +71,12 @@ export class SupabaseService {
         return data;
     }
 
-    async getAllStats(juego: 'ahorcado' | 'mayorMenor') {
+    async getAllStats(juego: 'ahorcado' | 'mayorMenor' | 'preguntados' | 'froggy') {
         const tablasDeJuegos = {
             ahorcado: this.ahorcadoTable,
-            mayorMenor: this.mayorMenorTable
+            mayorMenor: this.mayorMenorTable,
+            preguntados: this.preguntadosTable,
+            froggy: this.froggyTable
         };
 
         const { data, error } = await tablasDeJuegos[juego].select('*').order('aciertos', { ascending: false }).limit(10);

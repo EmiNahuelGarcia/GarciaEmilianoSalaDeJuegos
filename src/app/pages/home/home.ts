@@ -31,21 +31,21 @@ export class Home {
       textButton: 'Jugar Ahora'
     },
     {
-      title: 'Juego 3',
-      image: '/assets/placeholder.png',
-      textImage: 'Imagen del Juego 3',
-      nameGame: 'Nombre del Juego 3',
-      descriptionGame: 'Descripción del Juego 3',
-      link: 'https://www.youtube.com/watch?v=c2jprxwkr0k',
+      title: 'Preguntados',
+      image: '/assets/preguntados-assets/preguntados-portada.png',
+      textImage: 'Imagen del juego preguntados',
+      nameGame: 'Preguntados',
+      descriptionGame: 'Adivina las respuestas a preguntas de cultura anime dentro del tiempo limite',
+      link: '/juegos/preguntados',
       textButton: 'Jugar Ahora'
     },
     {
-      title: 'Juego 4',
-      image: '/assets/placeholder.png',
-      textImage: 'Imagen del Juego 4',
-      nameGame: 'Nombre del Juego 4',
-      descriptionGame: 'Descripción del Juego 4',
-      link: 'https://www.youtube.com/watch?v=c2jprxwkr0k',
+      title: 'Froggy',
+      image: '/assets/froggy-assets/froggy-portada.png',
+      textImage: 'Imagen del juego froggy',
+      nameGame: 'Froggy',
+      descriptionGame: 'Salta sobre las ranas y evita los enemigos en esta aventura divertida',
+      link: '/juegos/froggy',
       textButton: 'Jugar Ahora'
     }
   ]

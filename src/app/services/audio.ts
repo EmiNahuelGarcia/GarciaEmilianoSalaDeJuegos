@@ -93,5 +93,79 @@ export class AudioService {
         acierto.play();
     }
 
+    //preguntados
+    playAciertoPreguntados() {
+        const acierto = new Audio('assets/preguntados-assets/preguntados-acierto.ogg');
+        acierto.volume = 0.2;
+        acierto.play();
+    }
 
+    playErrorPreguntados() {
+        const error = new Audio('assets/preguntados-assets/preguntados-error.ogg');
+        error.volume = 0.2;
+        error.play();
+    }
+
+    playMusicaPreguntados() {
+        this.stopMusica();
+        this.audio.loop = true;
+        this.audio.src = 'assets/preguntados-assets/preguntados-song.ogg';
+        this.audio.volume = 0.06;
+        this.audio.play();
+    }
+
+    playMusicaVictoryPreguntados() {
+        this.pausarMusica();
+        this.audio.loop = false;
+        this.audio.src = 'assets/preguntados-assets/preguntados-musicaVictoria.ogg';
+        this.audio.volume = 0.1;
+        this.audio.play();
+    }
+
+    playMusicaGameOverPreguntados() {
+        this.pausarMusica();
+        this.audio.loop = false;
+        this.audio.src = 'assets/preguntados-assets/preguntados-musicaDerrota.ogg';
+        this.audio.volume = 0.2;
+        this.audio.play();
+    }
+
+    //Froggy
+    playMusicaFroggy() {
+        this.stopMusica();
+        this.audio.loop = true;
+        this.audio.src = 'assets/froggy-assets/froggy-musica.ogg';
+        this.audio.volume = 0.1;
+        this.audio.play();
+    }
+
+    playMusicaVictoryFroggy() {
+        this.pausarMusica();
+        this.audio.loop = false;
+        this.audio.src = 'assets/froggy-assets/froggy-musicaVictoria.ogg';
+        this.audio.volume = 0.1;
+        this.audio.play();
+    }
+
+    playMusicaGameOverFroggy() {
+        this.pausarMusica();
+        this.audio.loop = false;
+        this.audio.src = 'assets/froggy-assets/froggy-musicaDerrota.ogg';
+        this.audio.volume = 0.2;
+        this.audio.play();
+    }
+
+    playEfectoCoinFroggy() {
+        const coin = new Audio('assets/froggy-assets/froggy-agarrarMoneda.mp3');
+        coin.loop = false;
+        coin.volume = 0.2;
+        coin.play();    
+    }
+
+    playEfectoSplatFroggy() {
+        const splat = new Audio('assets/froggy-assets/froggy-splat.mp3');
+        splat.loop = false;
+        splat.volume = 0.2;
+        splat.play();    
+    }
 }

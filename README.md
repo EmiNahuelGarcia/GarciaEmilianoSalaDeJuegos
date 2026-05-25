@@ -121,6 +121,40 @@ En el sprint 2 se completó la funcionalidad de autenticación y se implementó 
 	- **Juegos:** Las dos primeras tarjetas en `Home` abren juegos jugables; al finalizar una partida se persisten las estadísticas (victoria/derrota, tiempo, puntos).
 	- **Resultados:** La vista `Resultados` muestra correctamente el top 10 por `aciertos` para cada juego y permite cambiar entre juegos.
 	- **Chat:** Creado el Chat en tiempo real, junto a su tabla con supabase, con estilo personalizado para los mensajes propios y los de otras personas, con persistencia en la base de datos
+
+	## Descripción del Sprint 4
+
+	En el sprint 4 se completo los juegos restantes y se cerró la funcionalidad general de la aplicación. El foco estuvo en terminar `Preguntados` y `Froggy`, integrar sus mecánicas con Supabase para guardar estadísticas y dejar la sala de juegos con las cuatro propuestas totalmente disponibles desde `Home`.
+
+	### Actividades realizadas
+
+	- **Implementación completa de Preguntados**:
+		- Consumo de una API externa para obtener trivias y armado de las preguntas.
+		- Sistema de juego con vidas, contador de aciertos, tiempo límite .
+		- Verificación de respuestas correctas e incorrectas con feedback visual y sonoro.
+		- Guardado de estadísticas al finalizar la partida en Supabase.
+	- **Implementación completa de Froggy**:
+		- Juego basado en `canvas` con sprites, movimiento de la rana, vehículos y monedas coleccionables.
+		- Lógica de colisiones, vidas, temporizador global, reinicio de posición y condición de victoria/derrota.
+		- Integración de audio para partida, victoria, derrota y efectos del juego.
+		- Persistencia de estadísticas al terminar la partida.
+	- **Cierre de la galería de juegos del Home**:
+		- Las cuatro tarjetas del `Home` quedan disponibles y enlazan a sus rutas correspondientes.
+		- Cada juego se puede abrir solo si el usuario está autenticado.
+	- **Mejoras sobre los resultados**:
+		- La pantalla de `Resultados` permite alternar entre los cuatro juegos y visualizar el top 10 de cada uno.
+		- Se centralizó el criterio de lectura de estadísticas para que el sistema sea escalable.
+	- **Ajustes generales de la aplicación**:
+		- Se mantuvo la navegación protegida con guards.
+		- Se conservó la experiencia visual del chat y del navbar según el estado de sesión.
+
+	### Criterios de aceptación
+
+	- **Preguntados:** El juego queda completamente jugable, con preguntas dinámicas, vidas, aciertos, tiempo y guardado de puntajes.
+	- **Froggy:** El juego queda completamente funcional, con colisiones, música, monedas, victoria, derrota y persistencia de resultados.
+	- **Home:** Las cuatro tarjetas visibles representan todos los juegos del proyecto y conducen a sus rutas reales.
+	- **Resultados:** Los rankings siguen funcionando para los cuatro juegos y permiten revisar estadísticas guardadas.
+	- **Cierre general:** La aplicación queda completa a nivel funcional para la entrega del TP, con autenticación, juegos, estadísticas y chat integrados.
 	
 	
 

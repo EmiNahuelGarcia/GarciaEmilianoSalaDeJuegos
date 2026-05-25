@@ -1,5 +1,5 @@
-export type JuegoId = 'ahorcado' | 'mayorMenor' | 'juego-3' | 'juego-4';
-export type JuegoActivoId = 'ahorcado' | 'mayorMenor';
+export type JuegoId = 'ahorcado' | 'mayorMenor' | 'preguntados' | 'froggy';
+export type JuegoActivoId = 'ahorcado' | 'mayorMenor' | 'preguntados' | 'froggy';
 
 export interface IJuegoRanking {
     id: JuegoId;

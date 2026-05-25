@@ -19,8 +19,8 @@ export class Resultados {
   juegos: IJuegoRanking[] = [
     { id: 'ahorcado', label: 'Ahorcado', displayName: 'Ahorcado', enabled: true },
     { id: 'mayorMenor', label: 'Mayor - Menor', displayName: 'Mayor - Menor', enabled: true },
-    { id: 'juego-3', label: 'Juego 3', displayName: 'Juego 3', enabled: false },
-    { id: 'juego-4', label: 'Juego 4', displayName: 'Juego 4', enabled: false },
+    { id: 'preguntados', label: 'Preguntados', displayName: 'Preguntados', enabled: true },
+    { id: 'froggy', label: 'Froggy', displayName: 'Froggy', enabled: true },
   ];
   juegoActivo = computed(
     () => this.juegos.find((juego) => juego.id === this.juego()) ?? this.juegos[0],
@@ -31,7 +31,7 @@ export class Resultados {
   }
 
   seleccionarJuego(juego: JuegoId) {
-    if (juego !== 'ahorcado' && juego !== 'mayorMenor') {
+    if (juego !== 'ahorcado' && juego !== 'mayorMenor' && juego !== 'preguntados' && juego !== 'froggy') {
       return;
     }
 
