@@ -40,6 +40,11 @@ export const routes: Routes = [
                 path: 'preguntados',
                 loadComponent: () => import('./games/preguntados/preguntados').then((p) => p.Preguntados),
                 canActivate: [authGuard]
+            },
+            {
+                path: 'froggy',
+                loadComponent: () => import('./games/froggy/froggy').then((f) => f.Froggy),
+                canActivate: [authGuard]
             }
         ]
     },

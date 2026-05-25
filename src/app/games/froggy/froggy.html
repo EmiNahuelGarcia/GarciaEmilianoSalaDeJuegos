@@ -1,0 +1,75 @@
+<div class="container-game">
+	<div class="froggy-hud">
+		<div class="froggy-player-info">
+			<span class="label">jugador: <b class="name-tag">{{ nombreUsuario }}</b></span>
+		</div>
+
+		<div class="froggy-stats">
+			<span>vidas restantes: {{ vidas() }}</span>
+			<span>puntos: {{ puntos() }}</span>
+				<span class="froggy-timer" [class.warning]="tiempoRestante() <= 5">
+				tiempo restante: {{ tiempoRestante() }}s</span>
+			<span class="froggy-global-timer">tiempo de juego: {{ tiempoFinal() }}s</span>
+		</div>
+	</div>
+
+	@if (!jugando()) {
+			<div class="froggy-start-overlay">
+				<div class="froggy-start-modal">
+					<div class="froggy-showcase">
+						<img src="assets/froggy-assets/froggy-portada.png" alt="Froggy listo para jugar" class="froggy-cover" />
+						<div class="froggy-meta">
+							<span class="froggy-tag">Froggy</span>
+							<b>Listo para cruzar</b>
+						</div>
+					</div>
+
+					<h1 class="froggy-start-title">Iniciar partida</h1>
+					<p class="froggy-start-copy">
+						Cruza la calle con las flechas, coleccioná monedas y evitá chocar con los autos.
+					</p>
+
+					<div class="froggy-rules">
+						<span class="froggy-rule-chip froggy-rule-chip--move">Flechas para mover</span>
+						<span class="froggy-rule-chip froggy-rule-chip--bounds">No choques con los autos</span>
+					</div>
+
+					<button type="button" (click)="iniciarJuego()" class="btn-terminal">COMENZAR</button>
+				</div>
+		</div>
+	}
+
+	@if (!jugando() && resultado() !== '') {
+		<div class="froggy-overlay" [class.sangre]="resultado() === 'derrota'">
+			<div class="froggy-modal-terminal">
+				<div class="froggy-final-sprite">
+					@if (resultado() === 'derrota') {
+						<img src="assets/froggy-assets/froggy-derrota.png" alt="Froggy derrota" />
+					} @else if (resultado() === 'victoria') {
+						<img src="assets/froggy-assets/froggy-victoria.png" alt="Froggy victoria" />
+					}
+				</div>
+
+				<h1 [class.death-glow]="resultado() === 'derrota'" [class.victory-glow]="resultado() === 'victoria'">
+					{{ resultado() === 'victoria' ? '¡GANASTE!' : 'Game over...' }}
+				</h1>
+
+				<p class="final-info">Duración de partida: {{ tiempoFinal() }}s</p>
+				@if (resultado() === 'victoria') {
+					<p class="final-info">Bonus de tiempo: +{{ tiempoBonus() }} puntos</p>
+				}
+				<p class="final-info">Puntos: {{ puntos() }}</p>
+
+				<button type="button" (click)="iniciarJuego()" class="btn-terminal">Volver a jugar</button>
+			</div>
+		</div>
+	}
+
+	<div class="froggy-page">
+		<div class="froggy-canvas-frame">
+			<div class="canvas-wrapper">
+				<canvas #canvas width="800" height="800" class="froggy-canvas"></canvas>
+			</div>
+		</div>
+	</div>
+</div>
