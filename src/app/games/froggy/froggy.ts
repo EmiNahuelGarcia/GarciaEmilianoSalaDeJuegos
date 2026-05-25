@@ -172,7 +172,7 @@ export class Froggy implements AfterViewInit, OnInit, OnDestroy {
     const tiempo_de_juego = this.tiempoFinal();
     const puntos = this.puntos();
 
-    //await this.db.insertStats('froggy', victoria, derrota, tiempo_de_juego, puntos, this.auth.getUserUuid(), this.nombreUsuario);
+    await this.db.insertStats('froggy', victoria, derrota, tiempo_de_juego, puntos, this.auth.getUserUuid(), this.nombreUsuario);
   }
 
   verificarVictoria(): void {

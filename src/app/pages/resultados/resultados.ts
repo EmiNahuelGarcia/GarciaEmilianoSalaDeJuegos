@@ -20,7 +20,7 @@ export class Resultados {
     { id: 'ahorcado', label: 'Ahorcado', displayName: 'Ahorcado', enabled: true },
     { id: 'mayorMenor', label: 'Mayor - Menor', displayName: 'Mayor - Menor', enabled: true },
     { id: 'preguntados', label: 'Preguntados', displayName: 'Preguntados', enabled: true },
-    { id: 'juego-4', label: 'Juego 4', displayName: 'Juego 4', enabled: false },
+    { id: 'froggy', label: 'Froggy', displayName: 'Froggy', enabled: true },
   ];
   juegoActivo = computed(
     () => this.juegos.find((juego) => juego.id === this.juego()) ?? this.juegos[0],
@@ -31,7 +31,7 @@ export class Resultados {
   }
 
   seleccionarJuego(juego: JuegoId) {
-    if (juego !== 'ahorcado' && juego !== 'mayorMenor' && juego !== 'preguntados') {
+    if (juego !== 'ahorcado' && juego !== 'mayorMenor' && juego !== 'preguntados' && juego !== 'froggy') {
       return;
     }
 
